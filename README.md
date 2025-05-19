@@ -8,7 +8,7 @@
 | [Add Name]               | [Matric No] |
 
 ## 📌 Project Title
-**[Enter Your Project Title Here]**
+**ACTIVITY TRACKER FOR IIUM STUDENT**
 
 ## 📝 Introduction
 
