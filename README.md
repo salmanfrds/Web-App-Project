@@ -33,12 +33,12 @@ The Student Activity Tracker is a web-based application designed to help student
 
 ## 🔧 Features and Functionalities
 
-- **User Authentication**: Register, login, and role-based access.
-- **CRUD Operations**: Users can create, read, update, and delete [your main content, e.g., blog posts, tasks, etc.].
-- **Admin Dashboard**: Manage users, view analytics, and moderate content.
-- **Responsive Design**: Accessible on both desktop and mobile devices.
-- **Search and Filter**: Find data quickly using search and category filters.
-- **Notifications**: Inform users about changes or updates in real-time.
+- **User Authentication**: Users can register, log in to their accounts, and log out securely.
+- **Create**: Users can add a new activity entry to their personal list.
+- **Read**: Users can view a list of their activities and see detailed information for each entry.
+- **Update**: Users can edit the details of any existing activity entry, Also editing their personal information in the Account.
+- **Delete**: Users can either mark an activity as done or permanently delete it from their list.
+- **Dashboard**: Manage users, view analytics, and moderate content, and search.
 
 ## 🗃️ Entity-Relationship Diagram (ERD)
 
