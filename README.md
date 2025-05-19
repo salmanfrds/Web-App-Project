@@ -19,15 +19,15 @@ The Student Activity Tracker is a web-based application designed to help student
 
 ## 🎯 Objectives
 
- # Support Student Engagement:
+ #### Support Student Engagement:
 - To encourage students to actively participate in academic and extracurricular activities by providing a platform to record and reflect on their involvement.
- ### Promote Self-Management and Accountability:
+ #### Promote Self-Management and Accountability:
 - To help students take ownership of their time and responsibilities by allowing them to log and monitor their personal activities and progress.
- ### Enhance Organization and Productivity:
+ #### Enhance Organization and Productivity:
 -  To provide students with a structured system for organizing their tasks and commitments, reducing the risk of missing deadlines or forgetting important events.
- ### Foster Digital Record Keeping:
+ #### Foster Digital Record Keeping:
 - To offer a centralized digital space where students can securely store and manage their activity records, which can be useful for resumes, portfolios, or academic evaluations.
- ### Encourage Consistent Participation:
+ #### Encourage Consistent Participation:
 - To motivate students to maintain continuous engagement in university life by tracking patterns and consistency in their activities over time.
 
 
