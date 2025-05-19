@@ -20,16 +20,16 @@ The Student Activity Tracker is a web-based application designed to help student
 -Enable users to register, log in, and log out securely.
 -Maintain active user sessions to ensure a smooth experience.
 ### Allow Full Activity Management (CRUD):
--Users can create and store new activity entries.
--Users can view a list of all their logged activities.
--Users can view detailed information for each activity.
--Users can update or modify existing activity records.
--Users can delete activities they no longer wish to keep.
+- Users can create and store new activity entries.
+- Users can view a list of all their logged activities.
+- Users can view detailed information for each activity.
+- Users can update or modify existing activity records.
+- Users can delete activities they no longer wish to keep.
 ### Enhance User Experience:
--Provide a clean and simple UI to ensure ease of use.
--Ensure data is private and only accessible to the respective logged-in user.
+- Provide a clean and simple UI to ensure ease of use.
+- Ensure data is private and only accessible to the respective logged-in user.
  ### Encourage Self-Tracking:
--Promote personal development by allowing students to keep a digital log of their participation in various events or tasks.
+- Promote personal development by allowing students to keep a digital log of their participation in various events or tasks.
 
 ## 🔧 Features and Functionalities
 
