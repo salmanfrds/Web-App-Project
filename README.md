@@ -3,9 +3,9 @@
 ## 🧑‍🤝‍🧑 Group Members
 | Name                     | Matric No   |
 |--------------------------|-------------|
-| Firdaus Muhammad Salman | 2223281     |
-| [Add Name]              | [Matric No] |
-| [Add Name]              | [Matric No] |
+| Firdaus Muhammad Salman  | 2223281     |
+| Naqash Mohd Aouf         |  2224251    |
+| [Add Name]               | [Matric No] |
 
 ## 📌 Project Title
 **[Enter Your Project Title Here]**
