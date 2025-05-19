@@ -52,6 +52,14 @@ The Student Activity Tracker is a web-based application designed to help student
 
 > 📎 _Upload your sequence diagram image to the `assets` folder or link to your diagram._
 
+## 🖼️ Mockup Design
+
+You can preview the static HTML/CSS mockup of the Student Activity Tracker at the following link:
+
+👉 [**View Mockup Here**](https://salmanfrds.github.io/SAT_Mockup/)
+
+> 💡 _This mockup was built using static HTML and CSS to represent the layout and flow of the web application pages (e.g., login, activity list, add/edit activity)._
+
 ## 📚 References
 
 - [MDN Web Docs - Express.js](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
