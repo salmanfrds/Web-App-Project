@@ -12,14 +12,24 @@
 
 ## 📝 Introduction
 
-The proposed web application is a Model-View-Controller (MVC) based system designed to [briefly describe what your app does and who it is for]. This application will streamline and enhance the way users interact with [specific field or industry], by offering a responsive and dynamic user experience.
+The Student Activity Tracker is a web-based application designed to help students efficiently manage and track their extracurricular or academic activities. This system enables users to register and securely log in to a personal dashboard where they can create, view, edit, and delete their own activities. By integrating basic CRUD operations with secure authentication mechanisms, the system provides a simple and intuitive interface for users to stay organized and reflect on their participation over time. The application aims to support students in developing better self-management habits and maintaining a log of their achievements and involvements.
 
 ## 🎯 Objectives
 
-- To develop a fully functional web application using the MVC architecture.
-- To ensure data consistency and separation of concerns across the application.
-- To apply best practices in full-stack development (frontend, backend, and database).
-- To enhance user experience through responsive UI and secure backend integration.
+# Implement Secure Authentication:
+Enable users to register, log in, and log out securely.
+Maintain active user sessions to ensure a smooth experience.
+# Allow Full Activity Management (CRUD):
+Users can create and store new activity entries.
+Users can view a list of all their logged activities.
+Users can view detailed information for each activity.
+Users can update or modify existing activity records.
+Users can delete activities they no longer wish to keep.
+# Enhance User Experience:
+Provide a clean and simple UI to ensure ease of use.
+Ensure data is private and only accessible to the respective logged-in user.
+# Encourage Self-Tracking:
+Promote personal development by allowing students to keep a digital log of their participation in various events or tasks.
 
 ## 🔧 Features and Functionalities
 
