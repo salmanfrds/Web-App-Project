@@ -75,7 +75,3 @@ You can preview the static HTML/CSS mockup of the Student Activity Tracker at th
 - [Markdown Guide](https://www.markdownguide.org/)
 
 ---
-
-## ✅ Submission
-
-[Link Submission:](https://github.com/salmanfrds/Web-App-Project)
