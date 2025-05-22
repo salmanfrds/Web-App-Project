@@ -6,7 +6,7 @@
 | Firdaus Muhammad Salman  | 2223281     |
 | Naqash Mohd Aouf         | 2224251     |
 | Muhammad Assad Iskandar  | 2217961     |
-| Youssuf  | 221     |
+| Youssouf Adoum Abakar    | 221     |
 
 ## 📌 Project Title
 **ACTIVITY TRACKER FOR IIUM STUDENT**
@@ -60,6 +60,8 @@ The Student Activity Tracker is a web-based application designed to help student
 You can preview the static HTML/CSS mockup of the Student Activity Tracker at the following link:
 
 👉 [**View Mockup Here**](https://salmanfrds.github.io/SAT_Mockup/)
+
+![Sequence Diagram](./mockup.jpg)
 
 > 💡 _This mockup was built using static HTML and CSS to represent the layout and flow of the web application pages (e.g., login, activity list, add/edit activity)._
 
