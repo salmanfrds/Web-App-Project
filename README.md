@@ -78,4 +78,4 @@ You can preview the static HTML/CSS mockup of the Student Activity Tracker at th
 
 ## ✅ Submission
 
-📎 Submit your GitHub repository link (URL of this README.md) to **iTaleem** before **20/05/2025**.
+[Link Submission:](https://github.com/salmanfrds/Web-App-Project)
