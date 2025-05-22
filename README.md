@@ -1,4 +1,4 @@
-# 📄  Activity Tracker for IIUM Website Proposal
+# 📄  Proposal for Student Activity Tracker Website
 
 ## 🧑‍🤝‍🧑 Group Members
 | Name                     | Matric No   |
