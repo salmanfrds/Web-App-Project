@@ -50,9 +50,9 @@ The Student Activity Tracker is a web-based application designed to help student
 
 ## 🔁 Sequence Diagram
 
-![Sequence Diagram](./assets/sequence-diagram.png)
+![Sequence Diagram](./seq-diagram.png)
 
-> 📎 _Upload your sequence diagram image to the `assets` folder or link to your diagram._
+*Figure 2: Sequence diagram*
 
 
 ## 🖼️ Mockup Design
