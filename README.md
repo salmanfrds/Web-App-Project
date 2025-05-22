@@ -5,7 +5,7 @@
 |--------------------------|-------------|
 | Firdaus Muhammad Salman  | 2223281     |
 | Naqash Mohd Aouf         |  2224251    |
-| [Add Name]               | [Matric No] |
+| Muhammad Assad Iskandar  | 2217961     |
 
 
 ## 📌 Project Title
@@ -43,9 +43,9 @@ The Student Activity Tracker is a web-based application designed to help student
 
 ## 🗃️ Entity-Relationship Diagram (ERD)
 
-![ERD](./assets/erd-diagram.png)
+![Activity Tracker ERD](./assets/erd-diagram.png)
 
-> 📎 _Upload your ERD image to the `assets` folder or link to your diagram hosting (e.g., dbdiagram.io, Lucidchart)._
+*Figure 1: Database schema showing relationships between Users, Activities, and Dashboard*
 
 
 ## 🔁 Sequence Diagram
