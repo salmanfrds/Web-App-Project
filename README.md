@@ -52,7 +52,8 @@ The Student Activity Tracker is a web-based application designed to help student
 
 ![Sequence Diagram](./seq-diagram.png)
 
-*Figure 2: Sequence diagram*
+> 💡 _This sequence diagram shows a **student** interacting with a website to perform **login** and **CRUD operations**. Requests from the **web browser** go to the **controller and route**, which communicate with the **auth system** for login and permission checks, and the **database** for data access. Responses are then returned to the browser.
+._
 
 
 ## 🖼️ Mockup Design
