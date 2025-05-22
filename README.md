@@ -69,8 +69,7 @@ You can preview the static HTML/CSS mockup of the Student Activity Tracker at th
 
 ## 📚 References
 
-- [MDN Web Docs - Express.js](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs)
-- [Sequelize ORM](https://sequelize.org/)
+- [Laravel Documentation](https://laravel.com/docs)
 - [Bootstrap Documentation](https://getbootstrap.com/)
 - [dbdiagram.io - ERD Tool](https://dbdiagram.io/)
 - [Markdown Guide](https://www.markdownguide.org/)
