@@ -1,6 +1,6 @@
 # 📄  Proposal for Student Activity Tracker Website
 
-## 🧑‍🤝‍🧑 Group Members
+## 🧑‍🤝‍🧑 Group 4 Members:
 | Name                     | Matric No   |
 |--------------------------|-------------|
 | Firdaus Muhammad Salman  | 2223281     |
