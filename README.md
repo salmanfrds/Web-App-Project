@@ -43,7 +43,7 @@ The Student Activity Tracker is a web-based application designed to help student
 
 ## 🗃️ Entity-Relationship Diagram (ERD)
 
-![Activity Tracker ERD](./assets/erd-diagram.png)
+![Activity Tracker ERD](./erd-diagram.png)
 
 *Figure 1: Database schema showing relationships between Users, Activities, and Dashboard*
 
