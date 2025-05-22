@@ -1,12 +1,12 @@
-# 📄 MVC Web Application Proposal
+# 📄  Student Tracker Website Proposal
 
 ## 🧑‍🤝‍🧑 Group Members
 | Name                     | Matric No   |
 |--------------------------|-------------|
 | Firdaus Muhammad Salman  | 2223281     |
-| Naqash Mohd Aouf         |  2224251    |
+| Naqash Mohd Aouf         | 2224251     |
 | Muhammad Assad Iskandar  | 2217961     |
-
+| Youssuf  | 221     |
 
 ## 📌 Project Title
 **ACTIVITY TRACKER FOR IIUM STUDENT**
