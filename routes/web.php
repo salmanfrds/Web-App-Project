@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 
 Route::get('/', function () {
-    return (new ActivityController())->index();
+    return view('login');
 });
 
 Route::get('/activities', [ActivityController::class, 'index']);

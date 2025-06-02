@@ -1,60 +1,92 @@
 @extends('layout')
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <div class="overflow-hidden rounded-lg bg-white shadow border-black border-2">
-        <div class="bg-blue-600 px-4 py-3 text-white">
-            <h2 class="font-medium">Activities List</h5>
+<div class="container py-5">
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+            <h4 class="mb-0 fw-bold"><i class="fas fa-list-ul me-2"></i> Activities List</h4>
         </div>
-        <div class="px-4 py-5 sm:p-6">
-            <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-100">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700">ID</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700">Title</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700">Description</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700">Start Date</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700">End Date</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700">Status</th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700">Category</th>
+                            <th class="py-3 px-4">ID</th>
+                            <th class="py-3 px-4">Title</th>
+                            <th class="py-3 px-4">Description</th>
+                            <th class="py-3 px-4">Start Date</th>
+                            <th class="py-3 px-4">End Date</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4">Category</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200 bg-white">
+                    <tbody>
                         @forelse ($john as $activity)
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-6 py-4 font-medium text-gray-900">{{ $activity->activity_id }}</td>
-                                <td class="px-6 py-4 text-gray-800">{{ $activity->title }}</td>
-                                <td class="px-6 py-4 text-gray-800">{{ Str::limit($activity->description, 50) }}</td>
-                                <td class="px-6 py-4"><span class="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">{{ \Carbon\Carbon::parse($activity->start_date)->format('M d, Y') }}</span></td>
-                                <td class="px-6 py-4"><span class="rounded-full bg-yellow-100 px-2 py-1 text-xs font-semibold text-yellow-800">{{ \Carbon\Carbon::parse($activity->end_date)->format('M d, Y') }}</span></td>
-                                <td class="px-6 py-4">
+                            <tr>
+                                <td class="px-4 py-3 fw-medium">{{ $activity->activity_id }}</td>
+                                <td class="px-4 py-3">{{ $activity->title }}</td>
+                                <td class="px-4 py-3">{{ Str::limit($activity->description, 50) }}</td>
+                                <td class="px-4 py-3">
+                                    <span class="badge bg-info text-dark rounded-pill">
+                                        <i class="far fa-calendar-alt me-1"></i>
+                                        {{ \Carbon\Carbon::parse($activity->start_date)->format('M d, Y') }}
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span class="badge bg-warning text-dark rounded-pill">
+                                        <i class="far fa-calendar-check me-1"></i>
+                                        {{ \Carbon\Carbon::parse($activity->end_date)->format('M d, Y') }}
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3">
                                     @if($activity->status == 'active')
-                                        <span class="rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">Active</span>
+                                        <span class="badge bg-success rounded-pill">
+                                            <i class="fas fa-circle me-1 small"></i> Active
+                                        </span>
                                     @elseif($activity->status == 'completed')
-                                        <span class="rounded-full bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-800">Completed</span>
+                                        <span class="badge bg-secondary rounded-pill">
+                                            <i class="fas fa-check-circle me-1"></i> Completed
+                                        </span>
                                     @else
-                                        <span class="rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-800">{{ $activity->status }}</span>
+                                        <span class="badge bg-danger rounded-pill">
+                                            <i class="fas fa-exclamation-circle me-1"></i> {{ $activity->status }}
+                                        </span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4"><span class="rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">{{ $activity->category }}</span></td>
+                                <td class="px-4 py-3">
+                                    <span class="badge bg-primary rounded-pill">
+                                        <i class="fas fa-tag me-1"></i> {{ $activity->category }}
+                                    </span>
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-4 text-center text-gray-500">No activities found</td>
+                                <td colspan="7" class="text-center py-5 text-muted">
+                                    <i class="fas fa-clipboard fa-3x mb-3 opacity-25"></i>
+                                    <p class="mb-0">No activities found</p>
+                                </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
-                <div class="fixed bottom-6 right-6">
-                    <a href="/activities/add" class="flex items-center justify-center rounded-full bg-blue-600 p-3 text-white shadow-lg hover:bg-blue-700 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                    </svg>
-                    <span class="ml-2 mr-1">Add Activity</span>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
+
+    <!-- Floating Button -->
+    <div class="position-fixed bottom-0 end-0 p-4">
+        <a href="/activities/add" class="btn btn-primary btn-lg rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" data-bs-toggle="tooltip" data-bs-placement="left" title="Add New Activity">
+            <i class="fas fa-plus fa-lg"></i>
+        </a>
+    </div>
 </div>
+
+<!-- Initialize tooltips -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    });
+</script>
 @endsection
