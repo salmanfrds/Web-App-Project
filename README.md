@@ -43,14 +43,14 @@ The Student Activity Tracker is a web-based application designed to help student
 
 ## 🗃️ Entity-Relationship Diagram (ERD)
 
-![Activity Tracker ERD](./erd-diagram.png)
+![Activity Tracker ERD](./image/erd-diagram.png)
 
 *Figure 1: Database schema showing relationships between Users, Activities, and Dashboard*
 
 
 ## 🔁 Sequence Diagram
 
-![Sequence Diagram](./seq-diagram.png)
+![Sequence Diagram](./image/seq-diagram.png)
 
 > 💡 _This sequence diagram shows a **student** interacting with a website to perform **login** and **CRUD operations**. Requests from the **web browser** go to the **controller and route**, which communicate with the **auth system** for login and permission checks, and the **database** for data access. Responses are then returned to the browser.
 ._
@@ -62,7 +62,7 @@ You can preview the static HTML/CSS mockup of the Student Activity Tracker at th
 
 👉 [**View Mockup Here**](https://salmanfrds.github.io/SAT_Mockup/)
 
-![Sequence Diagram](./mockup.jpg)
+![Sequence Diagram](./image/mockup.jpg)
 
 > 💡 _This mockup was built using static HTML and CSS to represent the layout and flow of the web application pages (e.g., login, activity list, add/edit activity)._
 
