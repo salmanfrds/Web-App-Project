@@ -36,4 +36,34 @@ class ActivityController extends Controller
 
         return view('add');
     }
+
+    public function displayDashboard()
+    {
+        $upcomingActivities = Activity::where('start_date', '>=', now())
+                            ->orderBy('start_date', 'asc')
+                            ->take(3)
+                            ->get();
+
+        $ongoingActivities = Activity::where('start_date', '<', now())
+                            ->where('end_date', '>=', now())
+                            ->orderBy('end_date', 'asc')
+                            ->take(3)
+                            ->get();
+
+        $upcomingCount = Activity::where('start_date', '>=', now())->count();
+
+        $ongoingCount = Activity::where('start_date', '<', now())
+                ->where('end_date', '>=', now())
+                ->count();
+
+        $completedCount = Activity::where('end_date', '<', now())->count();
+
+        return view('dashboard', [
+            'upcomingActivities' => $upcomingActivities,
+            'ongoingActivities' => $ongoingActivities,
+            'upcomingCount' => $upcomingCount,
+            'ongoingCount' => $ongoingCount,
+            'completedCount' => $completedCount,
+        ]);
+    }
 }

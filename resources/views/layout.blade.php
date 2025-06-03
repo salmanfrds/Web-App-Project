@@ -61,7 +61,7 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="/dashboard">
                 <i class="fas fa-graduation-cap me-2"></i>Student Activity Tracker
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -70,7 +70,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Dashboard</a>
+                        <a class="nav-link" href="/dashboard"><i class="fas fa-home me-1"></i> Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/activities"><i class="fas fa-list-check me-1"></i> Activities</a>

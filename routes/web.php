@@ -15,4 +15,4 @@ Route::get('/activities/add', function(){
 
 Route::post('/activities', [ActivityController::class, 'addActivity'])->name('activities.store');
 
-Route::get('/activities/something')->name('sambalgepuk');
+Route::get('/dashboard', [ActivityController::class, 'displayDashboard']);

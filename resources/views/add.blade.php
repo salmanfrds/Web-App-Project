@@ -84,8 +84,8 @@
                             <label for="status" class="col-md-4 col-form-label text-md-right">Status</label>
                             <div class="col-md-6">
                                 <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" required>
-                                    <option value="pending">Pending</option>
-                                    <option value="approved">Approved</option>
+                                    <option value="upcoming">Upcoming</option>
+                                    <option value="ongoing">Ongoing</option>
                                     <option value="completed">Completed</option>
                                     <option value="cancelled">Cancelled</option>
                                 </select>
