@@ -10,7 +10,6 @@
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-light">
                         <tr>
-                            <th class="py-3 px-4">ID</th>
                             <th class="py-3 px-4">Title</th>
                             <th class="py-3 px-4">Description</th>
                             <th class="py-3 px-4">Start Date</th>
@@ -20,9 +19,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($john as $activity)
-                            <tr>
-                                <td class="px-4 py-3 fw-medium">{{ $activity->activity_id }}</td>
+                        @forelse ($activities as $activity)
+                            <tr class="clickable-row" style="cursor: pointer;" onclick="window.location='{{ route('activities.view', $activity->activity_id) }}'">
                                 <td class="px-4 py-3">{{ $activity->title }}</td>
                                 <td class="px-4 py-3">{{ Str::limit($activity->description, 50) }}</td>
                                 <td class="px-4 py-3">
@@ -38,17 +36,25 @@
                                     </span>
                                 </td>
                                 <td class="px-4 py-3">
-                                    @if($activity->status == 'active')
+                                    @if($activity->status == 'upcoming')
+                                        <span class="badge bg-info rounded-pill">
+                                            <i class="fas fa-hourglass-start me-1 small"></i> Upcoming
+                                        </span>
+                                    @elseif($activity->status == 'ongoing')
                                         <span class="badge bg-success rounded-pill">
-                                            <i class="fas fa-circle me-1 small"></i> Active
+                                            <i class="fas fa-circle me-1 small"></i> Ongoing
                                         </span>
                                     @elseif($activity->status == 'completed')
                                         <span class="badge bg-secondary rounded-pill">
                                             <i class="fas fa-check-circle me-1"></i> Completed
                                         </span>
-                                    @else
+                                    @elseif($activity->status == 'cancelled')
                                         <span class="badge bg-danger rounded-pill">
-                                            <i class="fas fa-exclamation-circle me-1"></i> {{ $activity->status }}
+                                            <i class="fas fa-ban me-1"></i> Cancelled
+                                        </span>
+                                    @else
+                                        <span class="badge bg-warning text-dark rounded-pill">
+                                            <i class="fas fa-question-circle me-1"></i> {{ $activity->status }}
                                         </span>
                                     @endif
                                 </td>

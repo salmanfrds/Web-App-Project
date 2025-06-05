@@ -76,7 +76,7 @@
                             <td><span class="badge bg-warning text-dark">{{ $activity->status }}</span></td>
                             <td>
                                 <div class="btn-group" role="group">
-                                    <a href="/activities" class="btn btn-primary btn-sm">View</a>
+                                    <a href="{{ route('activities.view', $activity->activity_id) }}" class="btn btn-primary btn-sm">View</a>
                                     <a href="/activities" class="btn btn-success btn-sm">Complete</a>
                                 </div>
                             </td>
@@ -112,7 +112,7 @@
                             <td>{{ date('M d, Y', strtotime($activity->end_date)) }}</td>
                             <td><span class="badge bg-info">{{ $activity->status }}</span></td>
                             <td>
-                                <a href="/activities" class="btn btn-primary btn-sm">View</a>
+                                <a href="{{ route('activities.view', $activity->activity_id) }}" class="btn btn-primary btn-sm">View</a>
                             </td>
                         </tr>
                         @empty
