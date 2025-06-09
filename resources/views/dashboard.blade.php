@@ -2,7 +2,7 @@
 @section('content')
     <div class="container py-4">
         <div class="mb-4">
-            <h2 class="text-primary">Welcome back, Salman!</h2>
+            <h2 class="text-primary">Welcome back, {{$name}}!</h2>
             <p class="text-muted">Here's an overview of your recent academic activities.</p>
         </div>
 
@@ -77,7 +77,11 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <a href="{{ route('activities.view', $activity->activity_id) }}" class="btn btn-primary btn-sm">View</a>
-                                    <a href="/activities" class="btn btn-success btn-sm">Complete</a>
+                                    <form action="{{ route('activities.edit', $activity->activity_id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" name="status" value="complete">
+                                        <button type="submit" class="btn btn-success btn-sm">Complete</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

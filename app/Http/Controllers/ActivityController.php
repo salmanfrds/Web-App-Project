@@ -9,26 +9,33 @@ class ActivityController extends Controller
 {
     public function index()
     {
-        $upcomingActivities = Activity::where('start_date', '>=', now())
+        $userId = Auth::id();
+        $name = Auth::user()->name;
+
+        $upcomingActivities = Activity::where('user_id', $userId)
+                            ->where('start_date', '>=', now())
                             ->orderBy('start_date', 'asc')
                             ->take(3)
                             ->get();
 
-        $ongoingActivities = Activity::where('start_date', '<', now())
+        $ongoingActivities = Activity::where('user_id', $userId)
+                            ->where('start_date', '<', now())
                             ->where('end_date', '>=', now())
                             ->orderBy('end_date', 'asc')
                             ->take(3)
                             ->get();
 
-        $upcomingCount = Activity::where('start_date', '>=', now())->count();
+        $upcomingCount = Activity::where('user_id', $userId)->where('start_date', '>=', now())->count();
 
-        $ongoingCount = Activity::where('start_date', '<', now())
-                ->where('end_date', '>=', now())
-                ->count();
+        $ongoingCount = Activity::where('user_id', $userId)
+                            ->where('start_date', '<', now())
+                            ->where('end_date', '>=', now())
+                            ->count();
 
-        $completedCount = Activity::where('end_date', '<', now())->count();
+        $completedCount = Activity::where('user_id', $userId)->where('end_date', '<', now())->count();
 
         return view('dashboard', [
+            'name' => $name,
             'upcomingActivities' => $upcomingActivities,
             'ongoingActivities' => $ongoingActivities,
             'upcomingCount' => $upcomingCount,
@@ -39,19 +46,23 @@ class ActivityController extends Controller
 
     public function displayActivities()
     {
-        $activities = Activity::all();
+        $userId = Auth::id();
+
+        $activities = Activity::where('user_id', $userId)->get();
+
         return view('activities', ['activities' => $activities]);
     }
 
     public function addActivity(Request $request)
     {
+        $userId = Auth::id();
+
         $title = $request->input('title');
         $description = $request->input('description');
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $category = $request->input('category');
         $status = $request->input('status');
-        $user_id = $request->input('user_id');
 
         $entity = Activity::create([
             'title' => $title,
@@ -60,42 +71,12 @@ class ActivityController extends Controller
             'end_date' => $end_date,
             'category' => $category,
             'status' => $status,
-            'user_id' => $user_id,
+            'user_id' => $userId,
         ]);
 
         $entity->save();
 
         return view('add');
-    }
-
-    public function displayDashboard()
-    {
-        $upcomingActivities = Activity::where('start_date', '>=', now())
-                            ->orderBy('start_date', 'asc')
-                            ->take(3)
-                            ->get();
-
-        $ongoingActivities = Activity::where('start_date', '<', now())
-                            ->where('end_date', '>=', now())
-                            ->orderBy('end_date', 'asc')
-                            ->take(3)
-                            ->get();
-
-        $upcomingCount = Activity::where('start_date', '>=', now())->count();
-
-        $ongoingCount = Activity::where('start_date', '<', now())
-                ->where('end_date', '>=', now())
-                ->count();
-
-        $completedCount = Activity::where('end_date', '<', now())->count();
-
-        return view('dashboard', [
-            'upcomingActivities' => $upcomingActivities,
-            'ongoingActivities' => $ongoingActivities,
-            'upcomingCount' => $upcomingCount,
-            'ongoingCount' => $ongoingCount,
-            'completedCount' => $completedCount,
-        ]);
     }
 
     public function viewActivity($id)
@@ -124,25 +105,5 @@ class ActivityController extends Controller
         $activity->delete();
 
         return redirect()->route('activities')->with('success', 'Activity deleted.');
-    }
-
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            // Authentication successful
-            $user = Auth::user();
-
-            // Create a cookie with user ID that lasts for 1 hour
-            $cookie = cookie('user_id', $user->id, 60); // 60 minutes = 1 hour
-
-            return redirect()->intended('/')->withCookie($cookie);
-        }
-
-        // Authentication failed
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
     }
 }

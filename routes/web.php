@@ -2,17 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\AuthController;
+use App\Http\Middleware\Authenticate;
 
 //Root Directory
-Route::get('/', [ActivityController::class, 'index']);
+Route::get('/', [ActivityController::class, 'index'])->middleware(Authenticate::class);
 
 
 //Login
-Route::get('/login', function () {
-    return view('login');
-});
+Route::get('/login', [AuthController::class, 'index'])->name('login');
 
-Route::post('/login', [ActivityController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout']);
 
 
 //CRUD Activities
@@ -29,6 +31,5 @@ Route::get('/activities/{id}', [ActivityController::class, 'viewActivity'])->nam
 Route::post('/activities/{id}/status', [ActivityController::class, 'editActivity'])->name('activities.edit');
 
 Route::delete('/activities/{id}', [ActivityController::class, 'deleteActivity'])->name('activities.delete');
-
 
 //

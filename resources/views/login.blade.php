@@ -84,7 +84,13 @@
         <div class="login-body">
             <h2 class="text-center mb-4">Welcome Back</h2>
 
-            <form action="#" method="POST">
+            @if(session('error'))
+                <div class="alert alert-danger mb-3">
+                    <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
+                </div>
+            @endif
+
+            <form action="/login" method="POST">
                 @csrf
                 <div class="form-floating">
                     <input type="email" class="form-control" id="login-email" name="email" placeholder="name@example.com" required>

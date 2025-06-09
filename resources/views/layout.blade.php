@@ -79,7 +79,12 @@
                         <a class="nav-link" href="/profile"><i class="fas fa-user me-1"></i> Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
+                        <form action="/logout" method="POST" class="m-0 p-0">
+                            @csrf
+                            <button type="submit" class="nav-link btn btn-link" style="background: none; border: none; padding: 0.5rem 0; width: 100%; text-align: left;">
+                                <i class="fas fa-sign-out-alt me-1"></i> Logout
+                            </button>
+                        </form>
                     </li>
                 </ul>
             </div>
