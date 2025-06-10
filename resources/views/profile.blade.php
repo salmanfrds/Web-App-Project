@@ -10,7 +10,7 @@
             <div class="card-body p-0">
                 <div class="bg-light p-4 text-center">
                     @if(Auth::user()->profile_picture)
-                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" class="rounded-circle mb-3 shadow border border-white" width="150" height="150" alt="Profile Picture" style="object-fit: cover;">
+                        <img src="{{ asset('storage/images/' . Auth::user()->profile_picture) }}" class="rounded-circle mb-3 shadow border border-white" width="150" height="150" alt="Profile Picture" style="object-fit: cover;">
                     @else
                         <img src="http://localhost:8000/images/noimageprofile.jpg" class="rounded-circle mb-3 shadow border border-white" width="150" height="150" alt="Default Profile Picture">
                     @endif
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="card-footer bg-white text-center py-3">
-                    <a href="#" class="btn btn-primary btn-sm shadow-sm"><i class="fas fa-edit mr-1"></i> Edit Profile</a>
+                    <a href="/profile/edit" class="btn btn-primary btn-sm shadow-sm"><i class="fas fa-edit mr-1"></i> Edit Profile</a>
                 </div>
             </div>
         </div>

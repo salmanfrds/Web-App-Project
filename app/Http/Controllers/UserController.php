@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
 class UserController extends Controller
@@ -39,10 +40,18 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $kulliyahList = ['ICT', 'ENGIN', 'EDUC', 'LAWS', 'ENMS', 'ARCHI'];
+        $genderOptions = ['Male', 'Female'];
 
-        return view('profile.edit', [
+        return view('edit', [
             'user' => $user,
-            'kulliyahList' => $kulliyahList
+            'kulliyahList' => $kulliyahList,
+            'genderOptions' => $genderOptions,
+            'name' => $user->name,
+            'matric_number' => $user->matric_number,
+            'kulliyah' => $user->kulliyah,
+            'gender' => $user->gender,
+            'dob' => $user->dob,
+            'bio' => $user->bio,
         ]);
     }
 
@@ -51,18 +60,39 @@ class UserController extends Controller
         $user = Auth::user();
 
         $validatedData = $request->validate([
-            'full_name' => 'required|string|max:255',
-            'matric_no' => 'required|string|max:20|unique:users,matric_no,'.$user->id,
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'phone' => 'nullable|string|max:20',
-            'kulliyah' => 'nullable|string|max:100',
-            'program' => 'nullable|string|max:100'
+            'name' => 'required|string|max:255',
+            'matric_number' => 'nullable|string|max:20',
+            'kulliyah' => 'nullable|string|in:ICT,ENGIN,EDUC,LAWS,ENMS,ARCHI', // Validate against allowed values
+            'gender' => 'nullable|string|in:Male,Female', // Restrict to valid options
+            'dob' => 'nullable|date|before:today', // Ensure date is in the past
+            'bio' => 'nullable|string|max:500', // Allow optional bio with max 500 characters
+            'image' => 'nullable|image|max:2048',
         ]);
 
-        $user->update($validatedData);
+        if ($request->hasFile('image')) {
+            $uploadedFile = $request->file('image');
+            $filename = $uploadedFile->hashName(); // Generate a unique filename
 
-        return redirect()->route('profile.show')
-                         ->with('success', 'Profile updated successfully!');
+            if ($user->profile_picture) { // Check if the user already has a profile picture
+                // Remove 'images/' if it's part of the stored path
+                $oldImagePath = str_replace('images/', '', $user->profile_picture);
+                $oldImagePath = 'public/images/'. $oldImagePath;
+
+                if (Storage::exists($oldImagePath)) {
+                    Storage::delete($oldImagePath);
+                }
+            }
+
+            $path = $uploadedFile->storeAs('public/images', $filename);
+            $validatedData['profile_picture'] = $filename;
+        }
+
+        try {
+            $user->update($validatedData);
+            return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Failed to update profile.']);
+        }
     }
 }
 
