@@ -1,9 +1,19 @@
 @extends('layout')
 @section('content')
-    <div class="container py-4">
-        <div class="mb-4">
-            <h2 class="text-primary">Welcome back, {{$name}}!</h2>
-            <p class="text-muted">Here's an overview of your recent academic activities.</p>
+    <div class="container py-3">
+        <div class="mb-2">
+            <h2 class="text-gradient">Welcome back, {{ $name }}!</h2>
+            <style>
+                .text-gradient {
+                    background: linear-gradient(to right, #4e73df, #224abe);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    color: #4e73df; /* Fallback */
+                    font-weight: 650;
+                }
+            </style>
+            <p class="text-muted">Here's an overview of your recent activities.</p>
         </div>
 
         <div class="row mb-4">
@@ -12,7 +22,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="h5 mb-0 font-weight-bold text-primary">{{ $upcomingCount + $ongoingCount + $completedCount }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-primary">{{ $activitiesCount }}</div>
                                 <div class="text-xs font-weight-bold text-muted text-uppercase">Total Activities</div>
                             </div>
                             <div class="col-auto">
@@ -55,40 +65,56 @@
         </div>
 
         <h3 class="h4 text-dark mb-3">Ongoing Activities</h3>
-        <div class="card shadow-sm mb-4">
+        <div class="card shadow-sm mb-4 rounded">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="bg-light">
+                <table class="table table-hover table-sm-mobile">
+                    <thead class="table-light">
                         <tr>
-                            <th>Activity Name</th>
-                            <th>Category</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th class="fs-md-normal fs-sm">Activity</th>
+                            <th class="fs-md-normal fs-sm">Category</th>
+                            <th class="fs-md-normal fs-sm">Due</th>
+                            <th class="d-none d-md-table-cell fs-md-normal fs-sm">Status</th>
+                            <th class="fs-md-normal fs-sm">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($ongoingActivities as $activity)
-                        <tr>
-                            <td>{{ $activity->title }}</td>
-                            <td>{{ $activity->category }}</td>
-                            <td>{{ date('M d, Y', strtotime($activity->end_date)) }}</td>
-                            <td><span class="badge bg-warning text-dark">{{ $activity->status }}</span></td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a href="{{ route('activities.view', $activity->activity_id) }}" class="btn btn-primary btn-sm">View</a>
-                                    <form action="{{ route('activities.edit', $activity->activity_id) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <input type="hidden" name="status" value="complete">
-                                        <button type="submit" class="btn btn-success btn-sm">Complete</button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td style="word-break: break-word" class="fs-md-normal fs-sm border-md-end">
+                                    <span class="fw-medium">{{ $activity->title }}</span>
+                                </td>
+                                <td style="word-break: break-word" class="fs-md-normal fs-sm border-md-end">
+                                    <span class="badge bg-light text-dark">{{ $activity->category }}</span>
+                                </td>
+                                <td class="fs-md-normal fs-sm border-md-end">
+                                    <i class="far fa-calendar-alt me-1 text-muted"></i> {{ date('M d, Y', strtotime($activity->end_date)) }}
+                                </td>
+                                <td class="d-none d-md-table-cell border-md-end">
+                                    <span class="badge bg-warning text-dark fs-md-normal fs-sm">{{ $activity->status }}</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column flex-md-row gap-1">
+                                        <a href="{{ route('activities.view', $activity->activity_id) }}"
+                                            class="btn btn-primary btn-sm mb-1 mb-md-0 me-md-1">
+                                            <i class="fas fa-eye me-1"></i> View
+                                        </a>
+                                        <form action="{{ route('activities.edit', $activity->activity_id) }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="status" value="completed">
+                                            <button type="submit" class="btn btn-success btn-sm">
+                                                <i class="fas fa-check me-1"></i> Complete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
                         @empty
-                        <tr>
-                            <td colspan="5" class="text-center">No ongoing activities found.</td>
-                        </tr>
+                            <tr>
+                                <td colspan="5" class="text-center py-4 fs-md-normal fs-sm text-muted">
+                                    <i class="fas fa-clipboard-list fa-2x mb-2 d-block"></i>
+                                    No ongoing activities found.
+                                </td>
+                            </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -96,36 +122,50 @@
         </div>
 
         <h3 class="h4 text-dark mb-3">Upcoming Activities</h3>
-        <div class="card shadow-sm">
+        <div class="card shadow-sm mb-4 rounded">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>Activity Name</th>
-                            <th>Category</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($upcomingActivities as $activity)
-                        <tr>
-                            <td>{{ $activity->title }}</td>
-                            <td>{{ $activity->category }}</td>
-                            <td>{{ date('M d, Y', strtotime($activity->end_date)) }}</td>
-                            <td><span class="badge bg-info">{{ $activity->status }}</span></td>
-                            <td>
-                                <a href="{{ route('activities.view', $activity->activity_id) }}" class="btn btn-primary btn-sm">View</a>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="5" class="text-center">No upcoming activities found.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <table class="table table-hover table-sm-mobile">
+                <thead class="table-light">
+                <tr>
+                    <th class="fs-md-normal fs-sm">Activity</th>
+                    <th class="fs-md-normal fs-sm">Category</th>
+                    <th class="fs-md-normal fs-sm">Due</th>
+                    <th class="d-none d-md-table-cell fs-md-normal fs-sm">Status</th>
+                    <th class="fs-md-normal fs-sm">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @forelse($upcomingActivities as $activity)
+                    <tr>
+                    <td style="word-break: break-word" class="fs-md-normal fs-sm border-md-end">
+                        <span class="fw-medium">{{ $activity->title }}</span>
+                    </td>
+                    <td style="word-break: break-word" class="fs-md-normal fs-sm border-md-end">
+                        <span class="badge bg-light text-dark">{{ $activity->category }}</span>
+                    </td>
+                    <td class="fs-md-normal fs-sm border-md-end">
+                        <i class="far fa-calendar-alt me-1 text-muted"></i> {{ date('M d, Y', strtotime($activity->end_date)) }}
+                    </td>
+                    <td class="d-none d-md-table-cell border-md-end">
+                        <span class="badge bg-info text-white fs-md-normal fs-sm">{{ $activity->status }}</span>
+                    </td>
+                    <td>
+                        <a href="{{ route('activities.view', $activity->activity_id) }}"
+                        class="btn btn-primary btn-sm">
+                        <i class="fas fa-eye me-1"></i> View
+                        </a>
+                    </td>
+                    </tr>
+                @empty
+                    <tr>
+                    <td colspan="5" class="text-center py-4 fs-md-normal fs-sm text-muted">
+                        <i class="fas fa-calendar fa-2x mb-2 d-block"></i>
+                        No upcoming activities found.
+                    </td>
+                    </tr>
+                @endforelse
+                </tbody>
+            </table>
             </div>
         </div>
     </div>

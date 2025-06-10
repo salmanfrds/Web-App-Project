@@ -59,30 +59,30 @@
 </head>
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background-color: #4e73df;">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <i class="fas fa-graduation-cap me-2"></i>Student Activity Tracker
+                <img src="http://localhost:8000/images/iium-logo.png" alt="" width="40" class="me-2"> Activity Tracker
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Dashboard</a>
+                    <li class="nav-item mx-2 my-lg-0 my-2">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-2"></i> Dashboard</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/activities"><i class="fas fa-list-check me-1"></i> Activities</a>
+                    <li class="nav-item mx-2 my-lg-0 my-2">
+                        <a class="nav-link" href="/activities"><i class="fas fa-list-check me-2"></i> Activities</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/profile"><i class="fas fa-user me-1"></i> Profile</a>
+                    <li class="nav-item mx-2 my-lg-0 my-2">
+                        <a class="nav-link" href="/profile"><i class="fas fa-user me-2"></i> Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-2 my-lg-0 my-2">
                         <form action="/logout" method="POST" class="m-0 p-0">
                             @csrf
                             <button type="submit" class="nav-link btn btn-link" style="background: none; border: none; padding: 0.5rem 0; width: 100%; text-align: left;">
-                                <i class="fas fa-sign-out-alt me-1"></i> Logout
+                                <i class="fas fa-sign-out-alt me-2"></i> Logout
                             </button>
                         </form>
                     </li>
@@ -103,7 +103,7 @@
     <!-- Footer -->
     <footer class="py-4 text-white">
         <div class="container text-center">
-            <p class="mb-0">&copy; {{ date('Y') }} Student Activity Tracker. All rights reserved.</p>
+            <p class="mb-0 small">&copy; {{ date('Y') }} Student Activity Tracker. All rights reserved.</p>
         </div>
     </footer>
 

@@ -1,8 +1,8 @@
 @extends('layout')
 @section('content')
-<div class="container py-5">
-    <div class="card mb-4">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+<div class="container py-3">
+    <div class="card mb-3">
+        <div class="card-header text-white d-flex justify-content-between align-items-center py-3" style="background: linear-gradient(to right, #4e73df, #224abe)">
             <h4 class="mb-0 fw-bold"><i class="fas fa-list-ul me-2"></i> Activities List</h4>
         </div>
         <div class="card-body p-0">
@@ -11,19 +11,19 @@
                     <thead class="bg-light">
                         <tr>
                             <th class="py-3 px-4">Title</th>
-                            <th class="py-3 px-4">Description</th>
-                            <th class="py-3 px-4">Start Date</th>
+                            <th class="py-3 px-4 d-none d-md-table-cell">Description</th>
+                            <th class="py-3 px-4 d-none d-md-table-cell">Start Date</th>
                             <th class="py-3 px-4">End Date</th>
                             <th class="py-3 px-4">Status</th>
-                            <th class="py-3 px-4">Category</th>
+                            <th class="py-3 px-4 d-none d-md-table-cell">Category</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($activities as $activity)
                             <tr class="clickable-row" style="cursor: pointer;" onclick="window.location='{{ route('activities.view', $activity->activity_id) }}'">
                                 <td class="px-4 py-3">{{ $activity->title }}</td>
-                                <td class="px-4 py-3">{{ Str::limit($activity->description, 50) }}</td>
-                                <td class="px-4 py-3">
+                                <td class="px-4 py-3 d-none d-md-table-cell">{{ Str::limit($activity->description, 50) }}</td>
+                                <td class="px-4 py-3 d-none d-md-table-cell">
                                     <span class="badge bg-info text-dark rounded-pill">
                                         <i class="far fa-calendar-alt me-1"></i>
                                         {{ \Carbon\Carbon::parse($activity->start_date)->format('M d, Y') }}
@@ -36,13 +36,9 @@
                                     </span>
                                 </td>
                                 <td class="px-4 py-3">
-                                    @if($activity->status == 'upcoming')
-                                        <span class="badge bg-info rounded-pill">
-                                            <i class="fas fa-hourglass-start me-1 small"></i> Upcoming
-                                        </span>
-                                    @elseif($activity->status == 'ongoing')
+                                    @if($activity->status == 'active')
                                         <span class="badge bg-success rounded-pill">
-                                            <i class="fas fa-circle me-1 small"></i> Ongoing
+                                            <i class="fas fa-circle me-1 small"></i> Active
                                         </span>
                                     @elseif($activity->status == 'completed')
                                         <span class="badge bg-secondary rounded-pill">
@@ -58,7 +54,7 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="px-4 py-3">
+                                <td class="px-4 py-3 d-none d-md-table-cell">
                                     <span class="badge bg-primary rounded-pill">
                                         <i class="fas fa-tag me-1"></i> {{ $activity->category }}
                                     </span>
@@ -66,7 +62,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center py-5 text-muted">
+                                <td colspan="6" class="text-center py-5 text-muted">
                                     <i class="fas fa-clipboard fa-3x mb-3 opacity-25"></i>
                                     <p class="mb-0">No activities found</p>
                                 </td>

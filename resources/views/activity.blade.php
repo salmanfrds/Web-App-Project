@@ -1,8 +1,8 @@
 @extends('layout')
 @section('content')
-    <div class="container my-5">
+    <div class="container my-3">
         <div class="card shadow">
-            <div class="card-header bg-primary text-white">
+            <div class="card-header text-white" style="background: linear-gradient(to right, #4e73df, #224abe)">
                 <h1 class="mb-0">{{ $activity->title }}</h1>
             </div>
             <div class="card-body">
@@ -18,14 +18,11 @@
                                     <h6 class="text-muted">Status</h6>
                                     <span class="badge
                                         @switch($activity->status)
-                                            @case('upcoming')
-                                                bg-info
-                                                @break
-                                            @case('ongoing')
-                                                bg-primary
+                                            @case('active')
+                                                bg-success
                                                 @break
                                             @case('completed')
-                                                bg-success
+                                                bg-secondary
                                                 @break
                                             @case('cancelled')
                                                 bg-danger
@@ -61,32 +58,56 @@
                     </div>
                 </div>
 
-                <div class="text-end mt-3 d-flex flex-wrap gap-2 justify-content-end">
-                    {{-- Status Update Buttons --}}
-                    @foreach (['upcoming', 'ongoing', 'completed', 'cancelled'] as $status)
-                        <form action="{{ route('activities.edit', $activity->activity_id) }}" method="POST">
+                <div class="mt-4">
+                    <div class="d-flex flex-wrap gap-2 justify-content-end">
+                        {{-- Back Button --}}
+                        <a href="/activities" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-1"></i> Back
+                        </a>
+
+                        {{-- Status Update Buttons --}}
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Update Status
+                            </button>
+                            <ul class="dropdown-menu">
+                                @foreach (['active', 'completed', 'cancelled'] as $status)
+                                    <li>
+                                        <form action="{{ route('activities.edit', $activity->activity_id) }}" method="POST" class="dropdown-item-form">
+                                            @csrf
+                                            <input type="hidden" name="status" value="{{ $status }}">
+                                            <button type="submit" class="dropdown-item text-capitalize">
+                                                {{ $status }}
+                                            </button>
+                                        </form>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+
+                        {{-- Delete Button --}}
+                        <form action="{{ route('activities.delete', $activity->activity_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this activity?');">
                             @csrf
-                            <input type="hidden" name="status" value="{{ $status }}">
-                            <button type="submit" class="btn btn-outline-primary btn-sm text-capitalize">
-                                {{ $status }}
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash me-1"></i> Delete
                             </button>
                         </form>
-                    @endforeach
-
-                    {{-- Delete Button --}}
-                    <form action="{{ route('activities.delete', $activity->activity_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this activity?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger btn-sm">
-                            Delete
-                        </button>
-                    </form>
-
-                    {{-- Back Button --}}
-                    <a href="/activities" class="btn btn-outline-secondary btn-sm">
-                        <i class="bi bi-arrow-left"></i> Back
-                    </a>
+                    </div>
                 </div>
+
+                <style>
+                    /* Allow dropdown items to work with forms */
+                    .dropdown-item-form {
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .dropdown-item-form button {
+                        width: 100%;
+                        text-align: left;
+                    }
+                </style>
             </div>
         </div>
     </div>

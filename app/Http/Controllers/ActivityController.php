@@ -13,33 +13,34 @@ class ActivityController extends Controller
         $name = Auth::user()->name;
 
         $upcomingActivities = Activity::where('user_id', $userId)
-                            ->where('start_date', '>=', now())
+                            ->where('start_date', '>', now())
+                            ->whereNotIn('status', ['completed', 'cancelled'])
                             ->orderBy('start_date', 'asc')
                             ->take(3)
                             ->get();
 
         $ongoingActivities = Activity::where('user_id', $userId)
-                            ->where('start_date', '<', now())
+                            ->where('start_date', '<=', now())
                             ->where('end_date', '>=', now())
+                            ->whereNotIn('status', ['completed', 'cancelled'])
                             ->orderBy('end_date', 'asc')
                             ->take(3)
                             ->get();
 
-        $upcomingCount = Activity::where('user_id', $userId)->where('start_date', '>=', now())->count();
+        $upcomingCount = Activity::where('user_id', $userId)->where('status', 'active')->count();
 
-        $ongoingCount = Activity::where('user_id', $userId)
-                            ->where('start_date', '<', now())
-                            ->where('end_date', '>=', now())
+        $activitiesCount = Activity::where('user_id', $userId)
+                            ->where('status', '!=' , 'cancelled')
                             ->count();
 
-        $completedCount = Activity::where('user_id', $userId)->where('end_date', '<', now())->count();
+        $completedCount = Activity::where('user_id', $userId)->where('status', 'completed')->count();
 
         return view('dashboard', [
             'name' => $name,
             'upcomingActivities' => $upcomingActivities,
             'ongoingActivities' => $ongoingActivities,
             'upcomingCount' => $upcomingCount,
-            'ongoingCount' => $ongoingCount,
+            'activitiesCount' => $activitiesCount,
             'completedCount' => $completedCount,
         ]);
     }
@@ -62,7 +63,7 @@ class ActivityController extends Controller
         $start_date = $request->input('start_date');
         $end_date = $request->input('end_date');
         $category = $request->input('category');
-        $status = $request->input('status');
+        $status = 'active';
 
         $entity = Activity::create([
             'title' => $title,
@@ -76,6 +77,10 @@ class ActivityController extends Controller
 
         $entity->save();
 
+        return redirect()->route('activities');
+    }
+
+    public function displayAdd(){
         return view('add');
     }
 
