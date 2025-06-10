@@ -31,7 +31,16 @@ Route::post('/activities/{id}/status', [ActivityController::class, 'editActivity
 
 Route::delete('/activities/{id}', [ActivityController::class, 'deleteActivity'])->name('activities.delete');
 
+
+//CRUD User
+
 //profile route by Naqash
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 });
+
+// Registration Routes
+Route::get('/register', [UserController::class, 'register'])->name('register');
+Route::post('/register', [UserController::class, 'store'])->name('register.store');
+
+
