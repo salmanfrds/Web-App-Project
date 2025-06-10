@@ -3,6 +3,12 @@
     <div class="container my-3">
         <div class="card shadow">
             <div class="card-header text-white" style="background: linear-gradient(to right, #4e73df, #224abe)">
+                <div class="text-center my-3">
+                    <img src="{{ $activity->image ?? 'http://127.0.0.1:8000/images/addimage.png' }}"
+                         alt="{{ $activity->title }}"
+                         class="img-fluid rounded"
+                         style="max-height: 250px;">
+                </div>
                 <h1 class="mb-0">{{ $activity->title }}</h1>
             </div>
             <div class="card-body">
