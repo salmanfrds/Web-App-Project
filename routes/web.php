@@ -34,6 +34,9 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::delete('/activities/{id}', [ActivityController::class, 'deleteActivity'])->name('activities.delete');
 });
 
+// Banner Upload (ensure activity ID is passed to route)
+Route::post('/activities/{id}/upload-banner', [ActivityController::class, 'uploadBanner'])->name('activities.uploadBanner');
+
 //profile route by Naqash and Assad
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');

@@ -4,10 +4,16 @@
         <div class="card shadow">
             <div class="card-header text-white" style="background: linear-gradient(to right, #4e73df, #224abe)">
                 <div class="text-center my-3">
-                    <img src="{{ $activity->image ?? 'http://127.0.0.1:8000/images/addimage.png' }}"
-                         alt="{{ $activity->title }}"
-                         class="img-fluid rounded"
-                         style="max-height: 250px;">
+                   <form action="{{ route('activities.uploadBanner', $activity->activity_id) }}" method="POST" enctype="multipart/form-data" class="d-inline-block">
+                        @csrf
+                        <label for="banner-upload" style="cursor:pointer;">
+                            <img src="{{ $activity->banner_image ? asset($activity->banner_image) : asset('images/addimage.png') }}"
+                                 alt="{{ $activity->title }}"
+                                 class="img-fluid rounded"
+                                 style="max-height: 250px;">
+                        </label>
+                        <input type="file" name="banner_image" id="banner-upload" accept="image/*" style="display:none;" onchange="this.form.submit()">
+                    </form>
                 </div>
                 <h1 class="mb-0">{{ $activity->title }}</h1>
             </div>

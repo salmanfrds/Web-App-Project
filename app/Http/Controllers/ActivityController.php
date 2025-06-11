@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ActivityController extends Controller
 {
@@ -110,5 +111,30 @@ class ActivityController extends Controller
         $activity->delete();
 
         return redirect()->route('activities')->with('success', 'Activity deleted.');
+    }
+
+    //  Updated Image Upload Method
+    public function uploadBanner(Request $request, $id)
+    {
+        $request->validate([
+            'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $activity = Activity::where('activity_id', $id)->firstOrFail();
+
+        // Delete old banner if exists
+        if ($activity->banner_image && Storage::exists('public/' . $activity->banner_image)) {
+            Storage::delete('public/' . $activity->banner_image);
+        }
+
+        $file = $request->file('banner_image');
+        $path = $file->store('images', 'public');
+        $path = 'storage/' . $path;
+        $path = url($path);
+
+        $activity->banner_image = $path;
+        $activity->save();
+
+        return redirect()->back()->with('success', 'Banner uploaded successfully.');
     }
 }
