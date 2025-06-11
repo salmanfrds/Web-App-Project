@@ -258,6 +258,10 @@ The application uses Blade templates with a clean, responsive design:
 - **`deleteActivity($id)`**  
   Deletes an activity by its ID and redirects to the activities page.
 
+- **`uploadBanner(Request $request, $id)`**  
+  Validates and uploads a new banner image for an activity.  
+  Deletes the old image if it exists and updates the activity with the new image path.
+
 
 ### 🔐 AuthController Functions
 
