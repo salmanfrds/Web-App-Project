@@ -85,9 +85,46 @@ php artisan storage:link
 
 The authentication system is built using Laravel's built-in authentication features:
 
-- User registration with validation
+- User registration
+```php
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password, // Hash the password
+        ]);
+
+        return redirect()->route('profile')->with('success', 'Account registered successfully!');
+    }
+```
 - Secure login with session management
-- Password reset functionality
+```php
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        // Validate input
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        // Attempt to login
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/');
+        }
+
+        return redirect()->route('login')->with('error', 'Invalid email or password');
+    }
+```
 - Protected routes using middleware
 
 ```php
