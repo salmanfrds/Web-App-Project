@@ -79,6 +79,21 @@ php artisan serve
 php artisan storage:link
 ```
 
+### Entity-Relationship Diagram (ERD)
+
+![Activity Tracker ERD](./image/erd-diagram.png)
+
+> 💡 we added the image attributes to the user and activity table, while not implementing the dashboard table in execution because its not necessary
+._
+
+
+### Sequence Diagram
+
+![Sequence Diagram](./image/seq-diagram.png)
+
+> 💡 _This sequence diagram shows a **student** interacting with a website to perform **login** and **CRUD operations**. Requests from the **web browser** go to the **controller and route**, which communicate with the **auth system** for login and permission checks, and the **database** for data access. Responses are then returned to the browser.
+._
+
 ---
 
 ## 🔑 Authentication
