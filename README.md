@@ -235,7 +235,7 @@ This Blade template displays a responsive table of all user activities with deta
 - **Floating Action Button (FAB)**: A "+" button fixed at the bottom-right corner opens the Add Activity form (`/activities/add`).
 - **Tooltips**: Bootstrap tooltips enhance UX for interactive icons like the FAB.
 
----
+--
 
 ### 📄 Activity Detail View (activity.blade.php)
 
@@ -259,7 +259,7 @@ This Blade template renders a detailed view of a single activity, allowing the u
 - Responsive and mobile-friendly.
 - Custom styling to support form actions inside dropdown menus.
 
----
+--
 
 
 ### ➕ Add New Activity Form (add.blade.php)
@@ -289,7 +289,7 @@ This Blade view renders a responsive form for users to create and submit a new a
 - **Submission**:
   - Sends a `POST` request to the `activities.store` route to persist new activities.
     
----
+--
 
 
 ### 📊 Dashboard View (dashboard.blade.php)
@@ -337,7 +337,7 @@ Displays upcoming activities similarly to the ongoing table but without the “C
   - `$ongoingActivities`, `$upcomingActivities`
 - Conditional rendering for responsive UX and mobile-friendly tables.
 
----
+--
 
 
  ### 📝 Edit Profile View (edit.blade.php)
@@ -392,14 +392,13 @@ Ensure the controller passes:
 - `$image`
 - `$bio`
 
----
+--
 
 
 ### 🧱 Layout Blade: (layout.blade.php)
 
 This is the main layout file for the **Student Activity Tracker** Laravel web application. It sets up the overall HTML structure, navigation, styling, and component placeholders using Blade templating.
 
----
 
 #### 🧩 Key Sections
 
@@ -427,8 +426,6 @@ This is the main layout file for the **Student Activity Tracker** Laravel web ap
 - Bootstrap Bundle (JS + Popper)
 - Includes Blade `@stack('scripts')` for page-specific JavaScript.
 
----
-
 #### ✨ Styling Highlights
 - Responsive design.
 - Card elements with shadow and rounded borders.
@@ -437,10 +434,8 @@ This is the main layout file for the **Student Activity Tracker** Laravel web ap
 
 
 ### 🔐 Login Blade View: (login.blade.php)
-
 This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
 
----
 
 #### 📐 Layout Overview
 
@@ -459,8 +454,7 @@ This file is the **login interface** for the **Student Activity Tracker** built 
 
 - Submits to `/login` via POST.
 - Uses `@csrf` for security.
-
----
+  
 
 #### 🎨 Design & Styling
 
@@ -480,14 +474,13 @@ This file is the **login interface** for the **Student Activity Tracker** built 
 - Rounded card-style login box with padding and shadow.
 
 
----
+--
 
 
 ### 👤 Profile View: (profile.blade.php)
 
 This Blade view displays a logged-in user's profile details in a clean, responsive, and well-styled card layout. It is part of the **Student Activity Tracker** system built using Laravel and Bootstrap 5.
 
----
 
 #### 🧱 Layout Overview
 
@@ -495,7 +488,6 @@ This Blade view displays a logged-in user's profile details in a clean, responsi
 - **Main Section**: `@section('content')`
 - **Conditional**: Displays content only if the user is authenticated via `Auth::check()`.
 
----
 
 #### 📋 Displayed Information
 
@@ -514,14 +506,13 @@ If the user is authenticated, the following information is displayed inside a ca
 
 A button is provided at the bottom to allow users to edit their profile via `/profile/edit`.
 
----
+--
 
 
 ### 📝 Registration View: (register.blade.php)
 
 This Blade file provides a responsive and modern UI for new users to create an account on the **Student Activity Tracker** platform.
 
----
 
 #### 🧱 Layout Overview
 
@@ -531,7 +522,6 @@ This Blade file provides a responsive and modern UI for new users to create an a
   - Bootstrap 5.3
   - Font Awesome 6.4
 
----
 
 #### 📦 Functional Highlights
 
@@ -544,7 +534,6 @@ This Blade file provides a responsive and modern UI for new users to create an a
 | Password Confirmation        | Includes confirmation field to prevent password typos                      |
 | Redirect Link to Login       | Provides a prompt and link for users who already have an account           |
 
----
 
 
 
@@ -557,7 +546,6 @@ This Blade file provides a responsive and modern UI for new users to create an a
 | `password`           | Password   | `fa-lock`                 | Required         |
 | `password_confirmation` | Password | `fa-lock`              | Required         |
 
----
 
 ### ⚠️ Error Display
 
