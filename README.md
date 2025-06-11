@@ -255,6 +255,7 @@ Displays upcoming activities similarly to the ongoing table but without the “C
   - `$ongoingActivities`, `$upcomingActivities`
 - Conditional rendering for responsive UX and mobile-friendly tables.
 
+---
 ### 🔐 Login Blade View: (login.blade.php)
 ![Sudent Activity Tracker](./image/Login.jpeg)
 This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
@@ -295,6 +296,7 @@ This file is the **login interface** for the **Student Activity Tracker** built 
 - Hover and focus visual effects on buttons and inputs.
 - Rounded card-style login box with padding and shadow.
 
+---
 ### 📋 Activities List View (activities.blade.php)
 ![Sudent Activity Tracker](./image/Activities.jpeg)
 This Blade template displays a responsive table of all user activities with detailed visual status indicators and quick access features.
@@ -307,6 +309,7 @@ This Blade template displays a responsive table of all user activities with deta
 - **Floating Action Button (FAB)**: A "+" button fixed at the bottom-right corner opens the Add Activity form (`/activities/add`).
 - **Tooltips**: Bootstrap tooltips enhance UX for interactive icons like the FAB.
 
+---
 ### 📄 Activity Detail View (activity.blade.php)
 ![Sudent Activity Tracker](./image/Activity.jpeg)
 
@@ -328,6 +331,7 @@ This Blade template renders a detailed view of a single activity, allowing the u
 - Responsive and mobile-friendly.
 - Custom styling to support form actions inside dropdown menus.
 
+---
 ### ➕ Add New Activity Form (add.blade.php)
 ![Sudent Activity Tracker](./image/Add-Activity.jpeg)
 This Blade view renders a responsive form for users to create and submit a new activity.
@@ -355,6 +359,7 @@ This Blade view renders a responsive form for users to create and submit a new a
 - **Submission**:
   - Sends a `POST` request to the `activities.store` route to persist new activities.
 
+---
 ### 📝 Edit Profile View (edit.blade.php)
 ![Sudent Activity Tracker](./image/Edit-Profile.jpeg)
 This Blade template provides a clean and user-friendly form for users to update their profile information.
@@ -407,8 +412,7 @@ Ensure the controller passes:
 - `$image`
 - `$bio`
 
---
-
+---
 ### 👤 Profile View: (profile.blade.php)
 ![Sudent Activity Tracker](./image/Profile.jpeg)
 This Blade view displays a logged-in user's profile details in a clean, responsive, and well-styled card layout. It is part of the **Student Activity Tracker** system built using Laravel and Bootstrap 5.
@@ -434,6 +438,7 @@ If the user is authenticated, the following information is displayed inside a ca
 
 A button is provided at the bottom to allow users to edit their profile via `/profile/edit`.
 
+---
 ### 📝 Registration View: (register.blade.php)
 ![Sudent Activity Tracker](./image/Register.jpeg)
 This Blade file provides a responsive and modern UI for new users to create an account on the **Student Activity Tracker** platform.
@@ -467,8 +472,8 @@ This Blade file provides a responsive and modern UI for new users to create an a
 | `password`           | Password   | `fa-lock`                 | Required         |
 | `password_confirmation` | Password | `fa-lock`              | Required         |
 
+---
 ### ⚠️ Error Display
-
 - Uses:
   ```blade
   @if ($errors->any())
