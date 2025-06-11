@@ -235,8 +235,6 @@ The application uses Blade templates with a clean, responsive design:
 
 ## 🎮 Controllers
 
----
-
 ### 🗂️ ActivityController Functions
 
 - **`index()`**  
@@ -260,7 +258,6 @@ The application uses Blade templates with a clean, responsive design:
 - **`deleteActivity($id)`**  
   Deletes an activity by its ID and redirects to the activities page.
 
----
 
 ### 🔐 AuthController Functions
 
@@ -274,7 +271,6 @@ The application uses Blade templates with a clean, responsive design:
 - **`logout(Request $request)`**  
   Logs out the user, clears the session, and redirects to the login page.
 
----
 
 ### 👤 UserController Functions
 
@@ -313,7 +309,7 @@ Developed by Group 4 for INFO 3308, Web Application Development Class, Internati
 
 | Name                     | Matric No   | Contributions                                         |
 |--------------------------|-------------|----------------------------------------------------- |
-| Firdaus Muhammad Salman  | 2223281     | Authentication                            |
+| Firdaus Muhammad Salman  | 2223281     | All Login, Register and Activities views, controller, routes, and Middleware.|
 | Naqash Mohd Aouf         | 2224251     | Profile page view, controllers and routes |
 | Muhammad Assad Iskandar  | 2217961     | Edit page view, routes                    |
 | Youssouf Adoum Abakar    | 2115185     | |
