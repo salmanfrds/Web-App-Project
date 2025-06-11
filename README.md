@@ -131,8 +131,15 @@ The system uses Laravel's file storage system for handling activity images:
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Author & Contributions
 
-Developed by Group 4 for [Course Name], International Islamic University Malaysia, [Semester/Year].
+Developed by Group 4 for INFO 3308, Web Application Development Class, International Islamic University Malaysia, Semester 1 2023/2024.
+
+| Name                     | Matric No   | Contributions                                         |
+|--------------------------|-------------|----------------------------------------------------- |
+| Firdaus Muhammad Salman  | 2223281     | Authentication|
+| Naqash Mohd Aouf         | 2224251     | |
+| Muhammad Assad Iskandar  | 2217961     | |
+| Youssouf Adoum Abakar    | 2115185     | |
 
 ---
