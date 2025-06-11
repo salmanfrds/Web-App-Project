@@ -296,14 +296,38 @@ The application uses Blade templates with a clean, responsive design:
 
 ---
 
-## 📸 Image Upload & Storage
+## 🖼️ Image Upload & Storage
 
-The system uses Laravel's file storage system for handling activity images:
+The system uses Laravel's file storage system to handle profile and activity banner images securely and efficiently.
 
-- Secure file uploads with validation
-- Image resizing and optimization
-- Storage using Laravel's filesystem
-- Public access links for approved images
+### 🔐 Secure Upload & Validation
+- All uploaded images are validated (`jpg`, `jpeg`, `png`, max 2MB).
+- Prevents invalid or malicious files from being stored.
+- Enforces correct MIME types and file size restrictions.
+
+### 🔄 Auto File Replacement
+- When users or activities update their images, old files are deleted from storage to save space and avoid clutter.
+- Unique filenames are generated using Laravel's `hashName()` to avoid conflicts.
+
+### 🗂️ Organized Storage
+- Images are saved in the `public/images` directory using Laravel’s `Storage` facade.
+- Profile pictures: `public/images/filename.jpg`
+- Activity banners: `public/images/filename.jpg`
+
+### 🌐 Public Access to Approved Images
+- Uploaded images are converted into public URLs (`storage/images/...`) using `url()` helper.
+- These links are safely displayed in views, such as user profiles and activity detail pages.
+
+### 🛠️ Code Integration
+
+**UserController - Profile Picture Upload**
+- Handles optional image upload during profile update.
+- Deletes old profile image if a new one is uploaded.
+
+**ActivityController - Banner Image Upload**
+- Validates and uploads banner images for activities.
+- Deletes old banners and updates the activity record with the new image path.
+
 
 ---
 
