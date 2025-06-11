@@ -426,6 +426,7 @@ This is the main layout file for the **Student Activity Tracker** Laravel web ap
 - Navigation animation on hover.
 - Custom theme based on IIUM branding colors.
 
+--
 
 ### 🔐 Login Blade View: (login.blade.php)
 This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
