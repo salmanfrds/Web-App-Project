@@ -235,6 +235,7 @@ This Blade template displays a responsive table of all user activities with deta
 - **Floating Action Button (FAB)**: A "+" button fixed at the bottom-right corner opens the Add Activity form (`/activities/add`).
 - **Tooltips**: Bootstrap tooltips enhance UX for interactive icons like the FAB.
 
+---
 
 ### 📄 Activity Detail View (activity.blade.php)
 
@@ -257,6 +258,8 @@ This Blade template renders a detailed view of a single activity, allowing the u
 #### 💡 Extras
 - Responsive and mobile-friendly.
 - Custom styling to support form actions inside dropdown menus.
+
+---
 
 
 ### ➕ Add New Activity Form (add.blade.php)
@@ -286,6 +289,7 @@ This Blade view renders a responsive form for users to create and submit a new a
 - **Submission**:
   - Sends a `POST` request to the `activities.store` route to persist new activities.
     
+---
 
 
 ### 📊 Dashboard View (dashboard.blade.php)
@@ -333,9 +337,10 @@ Displays upcoming activities similarly to the ongoing table but without the “C
   - `$ongoingActivities`, `$upcomingActivities`
 - Conditional rendering for responsive UX and mobile-friendly tables.
 
+---
 
 
-  ### 📝 Edit Profile View (edit.blade.php)
+ ### 📝 Edit Profile View (edit.blade.php)
 
 This Blade template provides a clean and user-friendly form for users to update their profile information.
 
@@ -386,6 +391,8 @@ Ensure the controller passes:
 - `$dob`
 - `$image`
 - `$bio`
+
+---
 
 
 ### 🧱 Layout Blade: (layout.blade.php)
@@ -473,6 +480,8 @@ This file is the **login interface** for the **Student Activity Tracker** built 
 - Rounded card-style login box with padding and shadow.
 
 
+---
+
 
 ### 👤 Profile View: (profile.blade.php)
 
@@ -505,6 +514,7 @@ If the user is authenticated, the following information is displayed inside a ca
 
 A button is provided at the bottom to allow users to edit their profile via `/profile/edit`.
 
+---
 
 
 ### 📝 Registration View: (register.blade.php)
