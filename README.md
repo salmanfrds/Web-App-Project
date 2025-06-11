@@ -17,8 +17,9 @@
 5. [Routing]  
 6. [Views and Design]  
 7. [Controllers]  
-8. [Image Upload & Storage]  
-9. [Author]  
+8. [Image Upload & Storage]
+9. [Challenges]  
+10. [Author]  
 
 ---
 
