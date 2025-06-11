@@ -1,6 +1,8 @@
 # 📄  Report and Documentation for IIUM Student Activity Tracker Website
 
-## 📌 Project Title
+![Sudent Activity Tracker](./image/dashboard.png)
+
+## 📌 App Title
 **ACTIVITY TRACKER FOR IIUM STUDENT**
 
 ## 🧑‍🤝‍🧑 Group 4 Members:
@@ -13,15 +15,15 @@
 
 ## 📌 Table of Contents
 
-1. [Introduction](#introduction)  
-2. [Features](#features)  
-3. [Environment Setup](#environment-setup)  
-4. [Authentication](#authentication)  
-5. [Routing](#routing)  
-6. [Views](#views)  
-7. [Controllers](#controllers)  
-8. [Image Upload & Storage](#image-upload--storage)  
-9. [Author](#author)  
+1. [Introduction]
+2. [Features]  
+3. [Environment Setup]  
+4. [Authentication]  
+5. [Routing]  
+6. [Views]  
+7. [Controllers]  
+8. [Image Upload & Storage]  
+9. [Author]  
 
 ---
 
@@ -75,17 +77,9 @@ composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate
-php artisan serve
 php artisan storage:link
+php artisan serve
 ```
-
-### Entity-Relationship Diagram (ERD)
-
-![Activity Tracker ERD](./image/erd-diagram.png)
-
-> 💡 we added the image attributes to the user and activity table, while not implementing the dashboard table in execution because its not necessary
-._
-
 
 ### Sequence Diagram
 
@@ -221,7 +215,7 @@ Route::middleware([Authenticate::class])->group(function () {
 
 ---
 
-## 👁️ Views
+## 👁️ Views and Design
 
 ### 📋 Activities List View (activities.blade.php)
 
@@ -740,6 +734,6 @@ Developed by Group 4 for INFO 3308, Web Application Development Class, Internati
 | Firdaus Muhammad Salman  | 2223281     | All Login, Register and Activities views, controller, routes, and Middleware.|
 | Naqash Mohd Aouf         | 2224251     | Profile page view, controllers and routes |
 | Muhammad Assad Iskandar  | 2217961     | Edit page view, routes                    |
-| Youssouf Adoum Abakar    | 2115185     | |
+| Youssouf Adoum Abakar    | 2115185     | Add image banner on activity|
 
 ---
