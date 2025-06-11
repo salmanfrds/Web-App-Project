@@ -1,7 +1,5 @@
 # 📄  Report and Documentation for IIUM Student Activity Tracker Website
 
-![Sudent Activity Tracker](./image/dashboard.png)
-
 ## 📌 App Title
 **ACTIVITY TRACKER FOR IIUM STUDENT**
 
@@ -20,7 +18,7 @@
 3. [Environment Setup]  
 4. [Authentication]  
 5. [Routing]  
-6. [Views]  
+6. [Views and Design]  
 7. [Controllers]  
 8. [Image Upload & Storage]  
 9. [Author]  
@@ -95,45 +93,7 @@ php artisan serve
 The authentication system is built using Laravel's built-in authentication features:
 
 - User registration
-```php
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password, //automatic hashing
-        ]);
-
-        return redirect()->route('profile')->with('success', 'Account registered successfully!');
-    }
-```
 - Secure login and Logout with session management
-```php
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        // Validate input
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        // Attempt to login
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/');
-        }
-
-        return redirect()->route('login')->with('error', 'Invalid email or password');
-    }
-```
 - Protected routes using middleware
 
 ```php
@@ -216,78 +176,83 @@ Route::middleware([Authenticate::class])->group(function () {
 ---
 
 ## 👁️ Views and Design
+![Sudent Activity Tracker](./image/Dashboard.jpeg)
+### 🧱 Layout Blade: (layout.blade.php)
+This is the main layout file for the **Student Activity Tracker** Laravel web application. It sets up the overall HTML structure, navigation, styling, and component placeholders using Blade templating.
 
-### 📋 Activities List View (activities.blade.php)
+#### 🧩 Key Sections
 
-This Blade template displays a responsive table of all user activities with detailed visual status indicators and quick access features.
+##### 📌 `<head>`
+- **Bootstrap 5.3.0** for responsive design.
+- **Font Awesome 6.4.0** for icons.
+- **Custom CSS variables and layout**:
+  - `--primary-color`: Used for navbar and buttons.
+  - Background gradient and box-shadow styling.
+  
+##### 🔝 Navbar
+- Fixed top navigation bar with the IIUM logo and links to:
+  - `Dashboard` → `/`
+  - `Activities` → `/activities`
+  - `Profile` → `/profile`
+  - `Logout` → `/logout` (uses POST with CSRF token)
 
-#### 🔍 Features:
-- **Responsive Table**: Shows activity `Title`, `Description`, `Start/End Dates`, `Status`, and `Category`. Some columns hide on smaller screens for mobile-friendliness.
-- **Clickable Rows**: Each activity row is clickable, redirecting to the detailed activity page via `route('activities.view', $activity->activity_id)`.
-- **Status Badges**: Visually indicates activity status (`Active`, `Completed`, `Cancelled`) using color-coded badges.
-- **Category Tags**: Each activity's category is labeled with a styled tag.
-- **Floating Action Button (FAB)**: A "+" button fixed at the bottom-right corner opens the Add Activity form (`/activities/add`).
-- **Tooltips**: Bootstrap tooltips enhance UX for interactive icons like the FAB.
+##### ⛓️ Content Placeholder
+- Uses `@yield('content')` to inject child views dynamically into the `<main>` tag.
 
---
+##### 📥 Footer
+- Dark footer with current year and app name.
 
-### 📄 Activity Detail View (activity.blade.php)
+##### 🛠️ Scripts
+- Bootstrap Bundle (JS + Popper)
+- Includes Blade `@stack('scripts')` for page-specific JavaScript.
 
-This Blade template renders a detailed view of a single activity, allowing the user to manage its banner, metadata, and status.
-
-#### 🖼️ Banner Upload
-- Displays the activity's banner image or a placeholder.
-- Click on the image to upload a new banner.
-- Auto-submits the form when a new image is selected.
-
-#### 📝 Activity Details
-- Shows **Title**, **Description**, **Category**, **Start Date**, and **End Date**.
-- Status is visually highlighted using Bootstrap badges (`active`, `completed`, `cancelled`).
-
-#### ⚙️ Action Controls
-- **Back Button**: Returns to the full activity list.
-- **Status Dropdown**: Lets users update the activity's status via POST requests.
-- **Delete Button**: Allows deletion with confirmation for safety.
-
-#### 💡 Extras
-- Responsive and mobile-friendly.
-- Custom styling to support form actions inside dropdown menus.
-
---
+#### ✨ Styling Highlights
+- Responsive design.
+- Card elements with shadow and rounded borders.
+- Navigation animation on hover.
+- Custom theme based on IIUM branding colors.
 
 
-### ➕ Add New Activity Form (add.blade.php)
+### 🔐 Login Blade View: (login.blade.php)
+This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
 
-This Blade view renders a responsive form for users to create and submit a new activity.
+#### 📐 Layout Overview
 
-#### 🔧 Features
+##### 🏗️ Structure
 
-- **Form Fields**:
-  - **Title**: Text input, required.
-  - **Description**: Textarea, required.
-  - **Start Date** / **End Date**: `datetime-local` inputs for event scheduling.
-  - **Category**: Dropdown with predefined options (Academic, Sports, Culture, etc.).
+- **Header**: Branded with app name and icon.
+- **Form**: Includes:
+  - Email field
+  - Password field
+  - CSRF protection
+  - Submit button
+- **Conditional Error Alert**: Displays login errors from the session.
+- **Register Link**: Navigation for users without an account.
 
-- **Validation Handling**:
-  - Displays inline error messages using Laravel's `@error` directive.
-  - Retains user input with `old()` on validation failure.
+##### 📦 Form Action
 
-- **Design**:
-  - Bootstrap-based layout with responsive design.
-  - Uses card components and gradient header styling for better UI.
-  - Submit button styled with icons and gradient background.
+- Submits to `/login` via POST.
+- Uses `@csrf` for security.
+  
 
-- **Security**:
-  - Includes `@csrf` token for form protection.
+#### 🎨 Design & Styling
 
-- **Submission**:
-  - Sends a `POST` request to the `activities.store` route to persist new activities.
-    
---
+##### 🎨 Color Palette
 
+| Element       | Color Code      | Description                        |
+|---------------|------------------|------------------------------------|
+| Primary Color | `#4e73df`        | Blue, used in headers/buttons      |
+| Background    | `#f5f7fa → #c3cfe2` | Gradient background                |
+| Shadows       | `rgba(0, 0, 0, 0.1)` | Card shadows for depth            |
+
+##### ✨ Features
+
+- Responsive mobile-first design.
+- Floating form labels.
+- Hover and focus visual effects on buttons and inputs.
+- Rounded card-style login box with padding and shadow.
 
 ### 📊 Dashboard View (dashboard.blade.php)
-
 This Blade view provides an interactive user dashboard that displays a summary of activity data and lists of current tasks.
 
 #### 👋 Welcome Section
@@ -331,14 +296,71 @@ Displays upcoming activities similarly to the ongoing table but without the “C
   - `$ongoingActivities`, `$upcomingActivities`
 - Conditional rendering for responsive UX and mobile-friendly tables.
 
---
+### 📋 Activities List View (activities.blade.php)
+![Sudent Activity Tracker](./image/Activities.jpeg)
+This Blade template displays a responsive table of all user activities with detailed visual status indicators and quick access features.
 
+#### 🔍 Features:
+- **Responsive Table**: Shows activity `Title`, `Description`, `Start/End Dates`, `Status`, and `Category`. Some columns hide on smaller screens for mobile-friendliness.
+- **Clickable Rows**: Each activity row is clickable, redirecting to the detailed activity page via `route('activities.view', $activity->activity_id)`.
+- **Status Badges**: Visually indicates activity status (`Active`, `Completed`, `Cancelled`) using color-coded badges.
+- **Category Tags**: Each activity's category is labeled with a styled tag.
+- **Floating Action Button (FAB)**: A "+" button fixed at the bottom-right corner opens the Add Activity form (`/activities/add`).
+- **Tooltips**: Bootstrap tooltips enhance UX for interactive icons like the FAB.
 
- ### 📝 Edit Profile View (edit.blade.php)
+### 📄 Activity Detail View (activity.blade.php)
+![Sudent Activity Tracker](./image/Activity.jpeg)
 
+This Blade template renders a detailed view of a single activity, allowing the user to manage its banner, metadata, and status.
+
+#### 📝 Activity Details
+- Shows **Title**, **Description**, **Category**, **Start Date**, and **End Date**.
+- Status is visually highlighted using Bootstrap badges (`active`, `completed`, `cancelled`).
+- Displays the activity's banner image or a placeholder.
+- Click on the image to upload a new banner.
+- Auto-submits the form when a new image is selected.
+
+#### ⚙️ Action Controls
+- **Back Button**: Returns to the full activity list.
+- **Status Dropdown**: Lets users update the activity's status via POST requests.
+- **Delete Button**: Allows deletion with confirmation for safety.
+
+#### 💡 Extras
+- Responsive and mobile-friendly.
+- Custom styling to support form actions inside dropdown menus.
+
+### ➕ Add New Activity Form (add.blade.php)
+![Sudent Activity Tracker](./image/Add-Activity.jpeg)
+This Blade view renders a responsive form for users to create and submit a new activity.
+
+#### 🔧 Features
+
+- **Form Fields**:
+  - **Title**: Text input, required.
+  - **Description**: Textarea, required.
+  - **Start Date** / **End Date**: `datetime-local` inputs for event scheduling.
+  - **Category**: Dropdown with predefined options (Academic, Sports, Culture, etc.).
+
+- **Validation Handling**:
+  - Displays inline error messages using Laravel's `@error` directive.
+  - Retains user input with `old()` on validation failure.
+
+- **Design**:
+  - Bootstrap-based layout with responsive design.
+  - Uses card components and gradient header styling for better UI.
+  - Submit button styled with icons and gradient background.
+
+- **Security**:
+  - Includes `@csrf` token for form protection.
+
+- **Submission**:
+  - Sends a `POST` request to the `activities.store` route to persist new activities.
+
+### 📝 Edit Profile View (edit.blade.php)
+![Sudent Activity Tracker](./image/Edit-Profile.jpeg)
 This Blade template provides a clean and user-friendly form for users to update their profile information.
 
-### 🧩 Features
+#### 🧩 Features
 
 - **Fields Included**:
   - `Full Name`: Required text input.
@@ -388,103 +410,16 @@ Ensure the controller passes:
 
 --
 
-
-### 🧱 Layout Blade: (layout.blade.php)
-
-This is the main layout file for the **Student Activity Tracker** Laravel web application. It sets up the overall HTML structure, navigation, styling, and component placeholders using Blade templating.
-
-
-#### 🧩 Key Sections
-
-##### 📌 `<head>`
-- **Bootstrap 5.3.0** for responsive design.
-- **Font Awesome 6.4.0** for icons.
-- **Custom CSS variables and layout**:
-  - `--primary-color`: Used for navbar and buttons.
-  - Background gradient and box-shadow styling.
-  
-##### 🔝 Navbar
-- Fixed top navigation bar with the IIUM logo and links to:
-  - `Dashboard` → `/`
-  - `Activities` → `/activities`
-  - `Profile` → `/profile`
-  - `Logout` → `/logout` (uses POST with CSRF token)
-
-##### ⛓️ Content Placeholder
-- Uses `@yield('content')` to inject child views dynamically into the `<main>` tag.
-
-##### 📥 Footer
-- Dark footer with current year and app name.
-
-##### 🛠️ Scripts
-- Bootstrap Bundle (JS + Popper)
-- Includes Blade `@stack('scripts')` for page-specific JavaScript.
-
-#### ✨ Styling Highlights
-- Responsive design.
-- Card elements with shadow and rounded borders.
-- Navigation animation on hover.
-- Custom theme based on IIUM branding colors.
-
-
-### 🔐 Login Blade View: (login.blade.php)
-This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
-
-
-#### 📐 Layout Overview
-
-##### 🏗️ Structure
-
-- **Header**: Branded with app name and icon.
-- **Form**: Includes:
-  - Email field
-  - Password field
-  - CSRF protection
-  - Submit button
-- **Conditional Error Alert**: Displays login errors from the session.
-- **Register Link**: Navigation for users without an account.
-
-##### 📦 Form Action
-
-- Submits to `/login` via POST.
-- Uses `@csrf` for security.
-  
-
-#### 🎨 Design & Styling
-
-##### 🎨 Color Palette
-
-| Element       | Color Code      | Description                        |
-|---------------|------------------|------------------------------------|
-| Primary Color | `#4e73df`        | Blue, used in headers/buttons      |
-| Background    | `#f5f7fa → #c3cfe2` | Gradient background                |
-| Shadows       | `rgba(0, 0, 0, 0.1)` | Card shadows for depth            |
-
-##### ✨ Features
-
-- Responsive mobile-first design.
-- Floating form labels.
-- Hover and focus visual effects on buttons and inputs.
-- Rounded card-style login box with padding and shadow.
-
-
---
-
-
 ### 👤 Profile View: (profile.blade.php)
-
+![Sudent Activity Tracker](./image/Profile.jpeg)
 This Blade view displays a logged-in user's profile details in a clean, responsive, and well-styled card layout. It is part of the **Student Activity Tracker** system built using Laravel and Bootstrap 5.
 
-
 #### 🧱 Layout Overview
-
 - **Extends**: `layout.blade.php`
 - **Main Section**: `@section('content')`
 - **Conditional**: Displays content only if the user is authenticated via `Auth::check()`.
 
-
 #### 📋 Displayed Information
-
 If the user is authenticated, the following information is displayed inside a card:
 
 | Field             | Source                          | Fallback (if null)     |
@@ -500,11 +435,8 @@ If the user is authenticated, the following information is displayed inside a ca
 
 A button is provided at the bottom to allow users to edit their profile via `/profile/edit`.
 
---
-
-
 ### 📝 Registration View: (register.blade.php)
-
+![Sudent Activity Tracker](./image/Register.jpeg)
 This Blade file provides a responsive and modern UI for new users to create an account on the **Student Activity Tracker** platform.
 
 
@@ -515,7 +447,6 @@ This Blade file provides a responsive and modern UI for new users to create an a
 - **CSS Libraries**:
   - Bootstrap 5.3
   - Font Awesome 6.4
-
 
 #### 📦 Functional Highlights
 
@@ -528,9 +459,6 @@ This Blade file provides a responsive and modern UI for new users to create an a
 | Password Confirmation        | Includes confirmation field to prevent password typos                      |
 | Redirect Link to Login       | Provides a prompt and link for users who already have an account           |
 
-
-
-
 #### 📋 Form Fields
 
 | Field Name            | Input Type | Icon                      | Validation Notes |
@@ -539,7 +467,6 @@ This Blade file provides a responsive and modern UI for new users to create an a
 | `email`              | Email      | `fa-envelope`             | Required, valid  |
 | `password`           | Password   | `fa-lock`                 | Required         |
 | `password_confirmation` | Password | `fa-lock`              | Required         |
-
 
 ### ⚠️ Error Display
 
@@ -559,7 +486,7 @@ This Blade file provides a responsive and modern UI for new users to create an a
 
 ## 🎮 Controllers
 
-### 🗂️ ActivityController Functions
+### ActivityController Functions
 
 - **`index()`**  
   Displays the dashboard with user name, upcoming/ongoing activities, and activity statistics.
@@ -587,7 +514,7 @@ This Blade file provides a responsive and modern UI for new users to create an a
   Deletes the old image if it exists and updates the activity with the new image path.
 
 
-### 🔐 AuthController Functions
+### AuthController Functions
 
 - **`index()`**  
   Displays the login page.
@@ -600,7 +527,7 @@ This Blade file provides a responsive and modern UI for new users to create an a
   Logs out the user, clears the session, and redirects to the login page.
 
 
-### 👤 UserController Functions
+### UserController Functions
 
 - **`profile()`**  
   Displays the user's profile page.
