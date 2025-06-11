@@ -98,13 +98,13 @@ The authentication system is built using Laravel's built-in authentication featu
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password, // Hash the password
+            'password' => $request->password, //automatic hashing
         ]);
 
         return redirect()->route('profile')->with('success', 'Account registered successfully!');
     }
 ```
-- Secure login with session management
+- Secure login and Logout with session management
 ```php
     public function login(Request $request)
     {
