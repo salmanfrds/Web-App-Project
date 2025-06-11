@@ -298,6 +298,33 @@ The application uses Blade templates with a clean, responsive design:
 
 ## 🖼️ Image Upload & Storage
 
+```php
+public function uploadBanner(Request $request, $id)
+    {
+        $request->validate([
+            'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        $activity = Activity::where('activity_id', $id)->firstOrFail();
+
+        // Delete old banner if exists
+        if ($activity->banner_image && Storage::exists('public/' . $activity->banner_image)) {
+            Storage::delete('public/' . $activity->banner_image);
+        }
+
+        $file = $request->file('banner_image');
+        $path = $file->store('images', 'public');
+        $path = 'storage/' . $path;
+        $path = url($path);
+
+        $activity->banner_image = $path;
+        $activity->save();
+
+        return redirect()->back()->with('success', 'Banner uploaded successfully.');
+    }
+}
+```
+
 The system uses Laravel's file storage system to handle profile and activity banner images securely and efficiently.
 
 ### 🔐 Secure Upload & Validation
@@ -319,6 +346,49 @@ The system uses Laravel's file storage system to handle profile and activity ban
 - These links are safely displayed in views, such as user profiles and activity detail pages.
 
 ### 🛠️ Code Integration
+
+```php
+public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'matric_number' => 'nullable|string|max:20',
+            'kulliyah' => 'nullable|string|in:ICT,ENGIN,EDUC,LAWS,ENMS,ARCHI', // Validate against allowed values
+            'gender' => 'nullable|string|in:Male,Female', // Restrict to valid options
+            'dob' => 'nullable|date|before:today', // Ensure date is in the past
+            'bio' => 'nullable|string|max:500', // Allow optional bio with max 500 characters
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $uploadedFile = $request->file('image');
+            $filename = $uploadedFile->hashName(); // Generate a unique filename
+
+            if ($user->profile_picture) { // Check if the user already has a profile picture
+                // Remove 'images/' if it's part of the stored path
+                $oldImagePath = str_replace('images/', '', $user->profile_picture);
+                $oldImagePath = 'public/images/'. $oldImagePath;
+
+                if (Storage::exists($oldImagePath)) {
+                    Storage::delete($oldImagePath);
+                }
+            }
+
+            $path = $uploadedFile->storeAs('public/images', $filename);
+            $validatedData['profile_picture'] = $filename;
+        }
+
+        try {
+            $user->update($validatedData);
+            return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Failed to update profile.']);
+        }
+    }
+}
+```
 
 **UserController - Profile Picture Upload**
 - Handles optional image upload during profile update.
