@@ -1,8 +1,5 @@
 # 📄  Report and Documentation for IIUM Student Activity Tracker Website
 
-## 📌 App Title
-**ACTIVITY TRACKER FOR IIUM STUDENT**
-
 ## 🧑‍🤝‍🧑 Group 4 Members:
 | Name                     | Matric No   |
 |--------------------------|-------------|
@@ -212,45 +209,7 @@ This is the main layout file for the **Student Activity Tracker** Laravel web ap
 - Navigation animation on hover.
 - Custom theme based on IIUM branding colors.
 
-
-### 🔐 Login Blade View: (login.blade.php)
-This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
-
-#### 📐 Layout Overview
-
-##### 🏗️ Structure
-
-- **Header**: Branded with app name and icon.
-- **Form**: Includes:
-  - Email field
-  - Password field
-  - CSRF protection
-  - Submit button
-- **Conditional Error Alert**: Displays login errors from the session.
-- **Register Link**: Navigation for users without an account.
-
-##### 📦 Form Action
-
-- Submits to `/login` via POST.
-- Uses `@csrf` for security.
-  
-
-#### 🎨 Design & Styling
-
-##### 🎨 Color Palette
-
-| Element       | Color Code      | Description                        |
-|---------------|------------------|------------------------------------|
-| Primary Color | `#4e73df`        | Blue, used in headers/buttons      |
-| Background    | `#f5f7fa → #c3cfe2` | Gradient background                |
-| Shadows       | `rgba(0, 0, 0, 0.1)` | Card shadows for depth            |
-
-##### ✨ Features
-
-- Responsive mobile-first design.
-- Floating form labels.
-- Hover and focus visual effects on buttons and inputs.
-- Rounded card-style login box with padding and shadow.
+---
 
 ### 📊 Dashboard View (dashboard.blade.php)
 This Blade view provides an interactive user dashboard that displays a summary of activity data and lists of current tasks.
@@ -295,6 +254,46 @@ Displays upcoming activities similarly to the ongoing table but without the “C
   - `$name`, `$activitiesCount`, `$completedCount`, `$upcomingCount`
   - `$ongoingActivities`, `$upcomingActivities`
 - Conditional rendering for responsive UX and mobile-friendly tables.
+
+### 🔐 Login Blade View: (login.blade.php)
+![Sudent Activity Tracker](./image/Login.jpeg)
+This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
+
+#### 📐 Layout Overview
+
+##### 🏗️ Structure
+
+- **Header**: Branded with app name and icon.
+- **Form**: Includes:
+  - Email field
+  - Password field
+  - CSRF protection
+  - Submit button
+- **Conditional Error Alert**: Displays login errors from the session.
+- **Register Link**: Navigation for users without an account.
+
+##### 📦 Form Action
+
+- Submits to `/login` via POST.
+- Uses `@csrf` for security.
+  
+
+#### 🎨 Design & Styling
+
+##### 🎨 Color Palette
+
+| Element       | Color Code      | Description                        |
+|---------------|------------------|------------------------------------|
+| Primary Color | `#4e73df`        | Blue, used in headers/buttons      |
+| Background    | `#f5f7fa → #c3cfe2` | Gradient background                |
+| Shadows       | `rgba(0, 0, 0, 0.1)` | Card shadows for depth            |
+
+##### ✨ Features
+
+- Responsive mobile-first design.
+- Floating form labels.
+- Hover and focus visual effects on buttons and inputs.
+- Rounded card-style login box with padding and shadow.
 
 ### 📋 Activities List View (activities.blade.php)
 ![Sudent Activity Tracker](./image/Activities.jpeg)
