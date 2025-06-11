@@ -294,6 +294,7 @@ The application uses Blade templates with a clean, responsive design:
 - **`update(Request $request)`**  
   Validates and updates the user's profile data, including image upload if provided.
 
+---
 
 ## 📸 Image Upload & Storage
 
