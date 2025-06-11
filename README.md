@@ -27,10 +27,22 @@
 
 ## 📝 Introduction
 
-This project is a student activity tracker specifically tailored for IIUM students. It allows users to:
-- Register and log in to the system.
-- Create, view, edit, and delete their activity records.
-- Manage their personal profile and activity statuses.
+The Student Activity Tracker is a web-based application designed to help students efficiently manage and track their extracurricular or academic activities. This system enables users to register and securely log in to a personal dashboard where they can create, view, edit, and delete their own activities. By integrating basic CRUD operations with secure authentication mechanisms, the system provides a simple and intuitive interface for users to stay organized and reflect on their participation over time. The application aims to support students in developing better self-management habits and maintaining a log of their achievements and involvements.
+
+---
+
+## 🎯 Objectives
+
+ #### Support Student Engagement:
+- To encourage students to actively participate in academic and extracurricular activities by providing a platform to record and reflect on their involvement.
+ #### Promote Self-Management and Accountability:
+- To help students take ownership of their time and responsibilities by allowing them to log and monitor their personal activities and progress.
+ #### Enhance Organization and Productivity:
+-  To provide students with a structured system for organizing their tasks and commitments, reducing the risk of missing deadlines or forgetting important events.
+ #### Foster Digital Record Keeping:
+- To offer a centralized digital space where students can securely store and manage their activity records, which can be useful for resumes, portfolios, or academic evaluations.
+ #### Encourage Consistent Participation:
+- To motivate students to maintain continuous engagement in university life by tracking patterns and consistency in their activities over time.
 
 ---
 
@@ -38,9 +50,9 @@ This project is a student activity tracker specifically tailored for IIUM studen
 
 - 🔐 Secure Login and Registration System
 - 📝 Activity CRUD (Create, Read, Update, Delete)
-- 🙋‍♂️ User Profile Management
+- 🙋‍♂️ User Profile Management (CRUD)
 - 🖼️ Image Upload for Activity Documentation (if implemented)
-- 📜 Role-based Middleware Protection
+- 📜 Middleware Protection
 - 💻 Clean Blade UI with responsive layout
 
 ---
@@ -50,10 +62,9 @@ This project is a student activity tracker specifically tailored for IIUM studen
 ### Requirements
 
 - PHP >= 8.0  
-- Laravel >= 10.x  
-- MySQL or PostgreSQL  
+- Laravel >= 12.x  
+- Sqlite Database  
 - Composer  
-- Node.js & NPM (if frontend assets are managed)
 
 ### Installation
 
@@ -77,8 +88,28 @@ The authentication system is built using Laravel's built-in authentication featu
 - User registration with validation
 - Secure login with session management
 - Password reset functionality
-- Email verification (if implemented)
 - Protected routes using middleware
+
+```php
+/Authencticate Middleware to protect router
+class Authenticate
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next)
+    {
+        if (!Auth::check()) {
+            // If not logged in, redirect to /login
+            return redirect()->route('login');
+        }
+
+        return $next($request);
+    }
+}
+```
 
 ---
 
