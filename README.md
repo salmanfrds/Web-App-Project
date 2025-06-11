@@ -150,23 +150,20 @@ class Authenticate
 
 ---
 
-## 🔄 Routing
+## 🛣️ Routing
 
-The application's routes are organized in the following structure:
-1. Root Route
+The application uses a structured routing system organized into logical groups:
 
+### Root Route
+```php
 Route::get('/', [ActivityController::class, 'index'])->middleware(Authenticate::class);
-
-Purpose: Main entry point of the application
-
-Behavior:
-
-- Shows activity index page
+```
+- Serves as the main entry point
 - Protected by authentication middleware
-- Users must be logged in to access
+- Redirects to login if user is not authenticated
 
-
-2. Authentication Routes
+### Authentication Routes
+```php
 // Login
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -175,20 +172,13 @@ Route::post('/logout', [AuthController::class, 'logout']);
 // Registration
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/register', [UserController::class, 'store'])->name('register.store');
+```
+- Handles user authentication flows
+- Provides login, logout, and registration functionality
+- Named routes for easier reference in views
 
-Login Flow:
-
-- GET /login - Shows login form
-- POST /login - Processes login credentials
-- POST /logout - Handles user logout
-
-Registration Flow:
-
-- GET /register - Shows registration form
-- POST /register - Stores new user data
-
-3. Activity CRUD Routes (Protected)
-
+### Activity Management Routes
+```php
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/activities', [ActivityController::class, 'displayActivities'])->name('activities');
     Route::get('/activities/add', [ActivityController::class, 'displayAdd']);
@@ -197,53 +187,23 @@ Route::middleware([Authenticate::class])->group(function () {
     Route::post('/activities/{id}/status', [ActivityController::class, 'editActivity'])->name('activities.edit');
     Route::delete('/activities/{id}', [ActivityController::class, 'deleteActivity'])->name('activities.delete');
 });
+```
+- All routes protected by authentication middleware
+- Complete CRUD operations for activities
+- RESTful design pattern for resource management
 
-Security: All routes protected by authentication middleware
-
-CRUD Operations:
-
-List: GET /activities - Shows all activities
-
-Create:
-
-- GET /activities/add - Shows creation form
-- POST /activities/add - Stores new activity
-
-Read: GET /activities/{id} - Views specific activity
-
-Update: POST /activities/{id}/status - Edits activity status
-
-Delete: DELETE /activities/{id} - Removes activity
-
-4. Profile Routes (Protected)
-
+### Profile Routes
+```php
 Route::middleware([Authenticate::class])->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('/profile/edit', [UserController::class, 'edit']);
     Route::post('/profile/edit', [UserController::class, 'update'])->name('profile.update');
 });
+```
+- Secure user profile management
+- Allows viewing and editing user information
+- Protected by authentication checks
 
-Profile Management:
-
-- GET /profile - Shows user profile
-- GET /profile/edit - Shows edit form
-- POST /profile/edit - Updates profile data
-
-Console Routes (routes/console.php)
-
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
-
-Purpose: Developer utility command
-
-Functionality:
-
-- Runs when executing php artisan inspire
-- Displays random inspirational quote
-- Primarily for demonstration purposes
-
-  
 ---
 
 ## 👁️ Views
