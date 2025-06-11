@@ -1,4 +1,4 @@
-# 📄  Report and Documentation for IIUM Student Activity Tracker Website
+# Report and Documentation for IIUM Student Activity Tracker Website
 
 ## 🧑‍🤝‍🧑 Group 4 Members:
 | Name                     | Matric No   |
@@ -547,34 +547,6 @@ This Blade file provides a responsive and modern UI for new users to create an a
 ---
 
 ## 🖼️ Image Upload & Storage
-
-```php
-public function uploadBanner(Request $request, $id)
-    {
-        $request->validate([
-            'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
-
-        $activity = Activity::where('activity_id', $id)->firstOrFail();
-
-        // Delete old banner if exists
-        if ($activity->banner_image && Storage::exists('public/' . $activity->banner_image)) {
-            Storage::delete('public/' . $activity->banner_image);
-        }
-
-        $file = $request->file('banner_image');
-        $path = $file->store('images', 'public');
-        $path = 'storage/' . $path;
-        $path = url($path);
-
-        $activity->banner_image = $path;
-        $activity->save();
-
-        return redirect()->back()->with('success', 'Banner uploaded successfully.');
-    }
-}
-```
-
 The system uses Laravel's file storage system to handle profile and activity banner images securely and efficiently.
 
 ### 🔐 Secure Upload & Validation
@@ -596,7 +568,9 @@ The system uses Laravel's file storage system to handle profile and activity ban
 - These links are safely displayed in views, such as user profiles and activity detail pages.
 
 ### 🛠️ Code Integration
-
+**UserController - Profile Picture Upload**
+- Handles optional image upload during profile update.
+- Deletes old profile image if a new one is uploaded.
 ```php
 public function update(Request $request)
     {
@@ -640,17 +614,51 @@ public function update(Request $request)
 }
 ```
 
-**UserController - Profile Picture Upload**
-- Handles optional image upload during profile update.
-- Deletes old profile image if a new one is uploaded.
-
 **ActivityController - Banner Image Upload**
 - Validates and uploads banner images for activities.
 - Deletes old banners and updates the activity record with the new image path.
+```php
+public function uploadBanner(Request $request, $id)
+    {
+        $request->validate([
+            'banner_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
+        $activity = Activity::where('activity_id', $id)->firstOrFail();
+
+        // Delete old banner if exists
+        if ($activity->banner_image && Storage::exists('public/' . $activity->banner_image)) {
+            Storage::delete('public/' . $activity->banner_image);
+        }
+
+        $file = $request->file('banner_image');
+        $path = $file->store('images', 'public');
+        $path = 'storage/' . $path;
+        $path = url($path);
+
+        $activity->banner_image = $path;
+        $activity->save();
+
+        return redirect()->back()->with('success', 'Banner uploaded successfully.');
+    }
+}
+```
 
 ---
+## 🚀 Development Challenge
 
+Build a functional web app using Laravel.
+
+### Challenges
+
+- Structuring routes, controllers, and views cleanly
+- Managing database migrations and Eloquent relationships
+- Handling authentication and session state
+- Implementing form validation and error feedback
+- Ensuring mobile-responsive UI with Blade or frontend integration
+- Debugging during local development and deployment
+
+---
 ## 👨‍💻 Author & Contributions
 
 Developed by Group 4 for INFO 3308, Web Application Development Class, International Islamic University Malaysia, Semester 1 2023/2024.
