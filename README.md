@@ -137,8 +137,8 @@ Developed by Group 4 for INFO 3308, Web Application Development Class, Internati
 
 | Name                     | Matric No   | Contributions                                         |
 |--------------------------|-------------|----------------------------------------------------- |
-| Firdaus Muhammad Salman  | 2223281     | Authentication|
-| Naqash Mohd Aouf         | 2224251     | |
+| Firdaus Muhammad Salman  | 2223281     | Authentication                            |
+| Naqash Mohd Aouf         | 2224251     | Profile page view, controllers and routes |
 | Muhammad Assad Iskandar  | 2217961     | |
 | Youssouf Adoum Abakar    | 2115185     | |
 
