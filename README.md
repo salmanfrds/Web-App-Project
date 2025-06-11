@@ -225,7 +225,7 @@ Route::middleware([Authenticate::class])->group(function () {
 
 The application uses Blade templates with a clean, responsive design:
 
-- Layouts with common elements
+- Layouts with common elements 
 - Component-based design for reusability
 - Form validation with error messages
 - Activity listing with search and filter options
@@ -312,6 +312,6 @@ Developed by Group 4 for INFO 3308, Web Application Development Class, Internati
 | Firdaus Muhammad Salman  | 2223281     | All Login, Register and Activities views, controller, routes, and Middleware.|
 | Naqash Mohd Aouf         | 2224251     | Profile page view, controllers and routes |
 | Muhammad Assad Iskandar  | 2217961     | Edit page view, routes                    |
-| Youssouf Adoum Abakar    | 2115185     | Add image to activity page
+| Youssouf Adoum Abakar    | 2115185     | Add image to activity page, routes 
 
 ---
