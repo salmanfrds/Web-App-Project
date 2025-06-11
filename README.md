@@ -223,13 +223,345 @@ Route::middleware([Authenticate::class])->group(function () {
 
 ## 👁️ Views
 
-The application uses Blade templates with a clean, responsive design:
+### 📋 Activities List View (activities.blade.php)
 
-- Layouts with common elements
-- Component-based design for reusability
-- Form validation with error messages
-- Activity listing with search and filter options
-- User dashboard with activity statistics
+This Blade template displays a responsive table of all user activities with detailed visual status indicators and quick access features.
+
+#### 🔍 Features:
+- **Responsive Table**: Shows activity `Title`, `Description`, `Start/End Dates`, `Status`, and `Category`. Some columns hide on smaller screens for mobile-friendliness.
+- **Clickable Rows**: Each activity row is clickable, redirecting to the detailed activity page via `route('activities.view', $activity->activity_id)`.
+- **Status Badges**: Visually indicates activity status (`Active`, `Completed`, `Cancelled`) using color-coded badges.
+- **Category Tags**: Each activity's category is labeled with a styled tag.
+- **Floating Action Button (FAB)**: A "+" button fixed at the bottom-right corner opens the Add Activity form (`/activities/add`).
+- **Tooltips**: Bootstrap tooltips enhance UX for interactive icons like the FAB.
+
+
+### 📄 Activity Detail View (activity.blade.php)
+
+This Blade template renders a detailed view of a single activity, allowing the user to manage its banner, metadata, and status.
+
+#### 🖼️ Banner Upload
+- Displays the activity's banner image or a placeholder.
+- Click on the image to upload a new banner.
+- Auto-submits the form when a new image is selected.
+
+#### 📝 Activity Details
+- Shows **Title**, **Description**, **Category**, **Start Date**, and **End Date**.
+- Status is visually highlighted using Bootstrap badges (`active`, `completed`, `cancelled`).
+
+#### ⚙️ Action Controls
+- **Back Button**: Returns to the full activity list.
+- **Status Dropdown**: Lets users update the activity's status via POST requests.
+- **Delete Button**: Allows deletion with confirmation for safety.
+
+#### 💡 Extras
+- Responsive and mobile-friendly.
+- Custom styling to support form actions inside dropdown menus.
+
+
+### ➕ Add New Activity Form (add.blade.php)
+
+This Blade view renders a responsive form for users to create and submit a new activity.
+
+#### 🔧 Features
+
+- **Form Fields**:
+  - **Title**: Text input, required.
+  - **Description**: Textarea, required.
+  - **Start Date** / **End Date**: `datetime-local` inputs for event scheduling.
+  - **Category**: Dropdown with predefined options (Academic, Sports, Culture, etc.).
+
+- **Validation Handling**:
+  - Displays inline error messages using Laravel's `@error` directive.
+  - Retains user input with `old()` on validation failure.
+
+- **Design**:
+  - Bootstrap-based layout with responsive design.
+  - Uses card components and gradient header styling for better UI.
+  - Submit button styled with icons and gradient background.
+
+- **Security**:
+  - Includes `@csrf` token for form protection.
+
+- **Submission**:
+  - Sends a `POST` request to the `activities.store` route to persist new activities.
+    
+
+
+### 📊 Dashboard View (dashboard.blade.php)
+
+This Blade view provides an interactive user dashboard that displays a summary of activity data and lists of current tasks.
+
+#### 👋 Welcome Section
+
+- Dynamically greets the authenticated user by name.
+- Uses a gradient text effect via custom CSS for a modern visual.
+
+#### 📈 Statistics Cards
+
+Three summary cards show activity metrics at a glance:
+- **Total Activities** (🗓️)
+- **Completed Activities** (✅)
+- **Upcoming Activities** (⏰)
+
+Each card:
+- Is color-coded with `border-left` highlights (primary, success, info).
+- Uses Font Awesome icons for visual enhancement.
+
+#### 🔄 Ongoing Activities Table
+
+Displays current ongoing activities with:
+- **Title**
+- **Category**
+- **Due Date**
+- **Status**
+- **Actions**:
+  - **View**: Redirects to detailed activity page.
+  - **Complete**: Submits form to mark the activity as completed.
+
+Handles empty state with a friendly message and icon.
+
+#### 🔜 Upcoming Activities Table
+
+Displays upcoming activities similarly to the ongoing table but without the “Complete” button.
+
+#### 🧠 Logic Summary
+
+- Uses `@forelse` loops to gracefully handle empty results.
+- Relies on data passed from the controller:
+  - `$name`, `$activitiesCount`, `$completedCount`, `$upcomingCount`
+  - `$ongoingActivities`, `$upcomingActivities`
+- Conditional rendering for responsive UX and mobile-friendly tables.
+
+
+
+  ### 📝 Edit Profile View (edit.blade.php)
+
+This Blade template provides a clean and user-friendly form for users to update their profile information.
+
+### 🧩 Features
+
+- **Fields Included**:
+  - `Full Name`: Required text input.
+  - `Matric Number`: Optional text input.
+  - `Kulliyah`: Dropdown populated from a dynamic `$kulliyahList`.
+  - `Gender`: Dropdown populated from a dynamic `$genderOptions` list.
+  - `Date of Birth`: `date` input with formatting.
+  - `Profile Image`: Optional file upload for image.
+  - `Biography`: Multi-line textarea for user's short bio.
+
+- **Pre-filled Data**:
+  - Uses `old()` and fallback values from `$name`, `$matric_number`, `$gender`, `$kulliyah`, `$dob`, `$image`, `$bio` for pre-populating the form.
+
+- **File Upload**:
+  - Enables `multipart/form-data` encoding.
+  - Accepts only image files (`accept="image/*"`).
+  - Displays current image filename if available.
+
+- **Styling**:
+  - Utilizes Bootstrap 5 classes for a clean and responsive layout.
+  - Inline helper text shows existing image file info.
+
+- **Security**:
+  - CSRF protection using `@csrf`.
+
+#### 📤 Form Action
+
+- Submits data to `/profile/edit` route (likely handled in `ProfileController@edit`).
+- Expected to handle validation and store updates in the database.
+
+#### 📦 Data Binding
+
+All fields support:
+- **Old Input**: Retains values on validation failure.
+- **Default Values**: Pulled from passed controller variables.
+
+#### 🔄 Integration
+
+Ensure the controller passes:
+- `$name`
+- `$matric_number`
+- `$kulliyah`, `$kulliyahList`
+- `$gender`, `$genderOptions`
+- `$dob`
+- `$image`
+- `$bio`
+
+
+### 🧱 Layout Blade: (layout.blade.php)
+
+This is the main layout file for the **Student Activity Tracker** Laravel web application. It sets up the overall HTML structure, navigation, styling, and component placeholders using Blade templating.
+
+---
+
+#### 🧩 Key Sections
+
+##### 📌 `<head>`
+- **Bootstrap 5.3.0** for responsive design.
+- **Font Awesome 6.4.0** for icons.
+- **Custom CSS variables and layout**:
+  - `--primary-color`: Used for navbar and buttons.
+  - Background gradient and box-shadow styling.
+  
+##### 🔝 Navbar
+- Fixed top navigation bar with the IIUM logo and links to:
+  - `Dashboard` → `/`
+  - `Activities` → `/activities`
+  - `Profile` → `/profile`
+  - `Logout` → `/logout` (uses POST with CSRF token)
+
+##### ⛓️ Content Placeholder
+- Uses `@yield('content')` to inject child views dynamically into the `<main>` tag.
+
+##### 📥 Footer
+- Dark footer with current year and app name.
+
+##### 🛠️ Scripts
+- Bootstrap Bundle (JS + Popper)
+- Includes Blade `@stack('scripts')` for page-specific JavaScript.
+
+---
+
+#### ✨ Styling Highlights
+- Responsive design.
+- Card elements with shadow and rounded borders.
+- Navigation animation on hover.
+- Custom theme based on IIUM branding colors.
+
+
+### 🔐 Login Blade View: (login.blade.php)
+
+This file is the **login interface** for the **Student Activity Tracker** built with Laravel and styled using Bootstrap 5 and Font Awesome. It provides a clean and responsive user experience for user authentication.
+
+---
+
+#### 📐 Layout Overview
+
+##### 🏗️ Structure
+
+- **Header**: Branded with app name and icon.
+- **Form**: Includes:
+  - Email field
+  - Password field
+  - CSRF protection
+  - Submit button
+- **Conditional Error Alert**: Displays login errors from the session.
+- **Register Link**: Navigation for users without an account.
+
+##### 📦 Form Action
+
+- Submits to `/login` via POST.
+- Uses `@csrf` for security.
+
+---
+
+#### 🎨 Design & Styling
+
+##### 🎨 Color Palette
+
+| Element       | Color Code      | Description                        |
+|---------------|------------------|------------------------------------|
+| Primary Color | `#4e73df`        | Blue, used in headers/buttons      |
+| Background    | `#f5f7fa → #c3cfe2` | Gradient background                |
+| Shadows       | `rgba(0, 0, 0, 0.1)` | Card shadows for depth            |
+
+##### ✨ Features
+
+- Responsive mobile-first design.
+- Floating form labels.
+- Hover and focus visual effects on buttons and inputs.
+- Rounded card-style login box with padding and shadow.
+
+
+
+### 👤 Profile View: (profile.blade.php)
+
+This Blade view displays a logged-in user's profile details in a clean, responsive, and well-styled card layout. It is part of the **Student Activity Tracker** system built using Laravel and Bootstrap 5.
+
+---
+
+#### 🧱 Layout Overview
+
+- **Extends**: `layout.blade.php`
+- **Main Section**: `@section('content')`
+- **Conditional**: Displays content only if the user is authenticated via `Auth::check()`.
+
+---
+
+#### 📋 Displayed Information
+
+If the user is authenticated, the following information is displayed inside a card:
+
+| Field             | Source                          | Fallback (if null)     |
+|------------------|----------------------------------|------------------------|
+| Profile Picture   | `Auth::user()->profile_picture` | Default image          |
+| Name              | `Auth::user()->name`            | —                      |
+| Email             | `Auth::user()->email`           | —                      |
+| Matric Number     | `Auth::user()->matric_number`   | `Not provided`         |
+| Kulliyah          | `Auth::user()->kulliyah`        | `Not provided`         |
+| Gender            | `Auth::user()->gender`          | `Not provided`         |
+| Date of Birth     | `Auth::user()->dob`             | `Not provided`         |
+| Bio               | `Auth::user()->bio`             | `No bio available`     |
+
+A button is provided at the bottom to allow users to edit their profile via `/profile/edit`.
+
+
+
+### 📝 Registration View: (register.blade.php)
+
+This Blade file provides a responsive and modern UI for new users to create an account on the **Student Activity Tracker** platform.
+
+---
+
+#### 🧱 Layout Overview
+
+- **HTML5** standard structure.
+- **Title**: `Register | Student Activity Tracker`
+- **CSS Libraries**:
+  - Bootstrap 5.3
+  - Font Awesome 6.4
+
+---
+
+#### 📦 Functional Highlights
+
+| Feature                      | Description                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------|
+| CSRF Protection              | Includes meta and `@csrf` token to secure the form                         |
+| Form Handling                | Submits to `register.store` route (`POST`)                                 |
+| Error Handling               | Displays all form validation errors using `@if ($errors->any())`           |
+| Old Input Persistence        | Uses `old('field')` for sticky forms after validation errors               |
+| Password Confirmation        | Includes confirmation field to prevent password typos                      |
+| Redirect Link to Login       | Provides a prompt and link for users who already have an account           |
+
+---
+
+
+
+#### 📋 Form Fields
+
+| Field Name            | Input Type | Icon                      | Validation Notes |
+|----------------------|------------|---------------------------|------------------|
+| `name`               | Text       | `fa-user`                 | Required         |
+| `email`              | Email      | `fa-envelope`             | Required, valid  |
+| `password`           | Password   | `fa-lock`                 | Required         |
+| `password_confirmation` | Password | `fa-lock`              | Required         |
+
+---
+
+### ⚠️ Error Display
+
+- Uses:
+  ```blade
+  @if ($errors->any())
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+  @endif
+
+
 
 ---
 
