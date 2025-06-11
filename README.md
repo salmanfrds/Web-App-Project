@@ -667,7 +667,7 @@ Build a functional web app using Laravel.
 ---
 ## 👨‍💻 Author & Contributions
 
-Developed by Group 4 for INFO 3308, Web Application Development Class, International Islamic University Malaysia, Semester 1 2023/2024.
+Developed by Group D for INFO 3305, Web Application Development Class, International Islamic University Malaysia, Semester 1 2023/2024.
 
 | Name                     | Matric No   | Contributions                                         |
 |--------------------------|-------------|----------------------------------------------------- |
