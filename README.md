@@ -235,14 +235,65 @@ The application uses Blade templates with a clean, responsive design:
 
 ## 🎮 Controllers
 
-Key controllers include:
+---
 
-- `AuthController` - Handles user authentication
-- `ActivityController` - Manages activity CRUD operations
-- `ProfileController` - Handles user profile management
-- `HomeController` - Manages the dashboard and home page
+### 🗂️ ActivityController Functions
+
+- **`index()`**  
+  Displays the dashboard with user name, upcoming/ongoing activities, and activity statistics.
+
+- **`displayActivities()`**  
+  Shows all activities for the logged-in user.
+
+- **`addActivity(Request $request)`**  
+  Saves a new activity using input from the form and redirects to the activities page.
+
+- **`displayAdd()`**  
+  Displays the form to add a new activity.
+
+- **`viewActivity($id)`**  
+  Shows the details of a specific activity based on its ID.
+
+- **`editActivity(Request $request, $id)`**  
+  Updates the status of a specific activity.
+
+- **`deleteActivity($id)`**  
+  Deletes an activity by its ID and redirects to the activities page.
 
 ---
+
+### 🔐 AuthController Functions
+
+- **`index()`**  
+  Displays the login page.
+
+- **`login(Request $request)`**  
+  Validates login input and attempts to authenticate the user.  
+  Redirects to the homepage if successful or back to login with an error if failed.
+
+- **`logout(Request $request)`**  
+  Logs out the user, clears the session, and redirects to the login page.
+
+---
+
+### 👤 UserController Functions
+
+- **`profile()`**  
+  Displays the user's profile page.
+
+- **`register()`**  
+  Shows the registration form.
+
+- **`store(Request $request)`**  
+  Validates registration input and creates a new user.  
+  Redirects to profile on success.
+
+- **`edit()`**  
+  Loads the profile edit form with current user data and options for gender and kulliyah.
+
+- **`update(Request $request)`**  
+  Validates and updates the user's profile data, including image upload if provided.
+
 
 ## 📸 Image Upload & Storage
 
